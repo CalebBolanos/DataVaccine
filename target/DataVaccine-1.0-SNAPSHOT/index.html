@@ -1,61 +1,373 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-</head>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+        <!-- vue de pag inicio -->
+        <!-- MATERIAL ICONS -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+        <!-- FONTAWESOME ICONS -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+        crossorigin="anonymous"></script>
+    </head>
 
-<body>
-    <div id="app">
-        <v-app>
+    <body>
+        <div id="app">
+            <v-app>
 
-            <v-app-bar app elevation="5" style=" background-color: rgba(255, 255, 255, 0.5) !important; backdrop-filter: saturate(180%) blur(20px) !important;">
-                <v-app-bar-title>DataVaccine</v-app-bar-title>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" text href="iniciarSesion.jsp">Iniciar Sesión</v-btn>
-                <v-btn color="secondary" text href="registro.jsp">Crea una Cuenta</v-btn>
-            </v-app-bar>
+                <v-app-bar app elevation="5" style=" background-color: rgba(255, 255, 255, 0.5) !important; backdrop-filter: saturate(180%) blur(20px) !important;">
+                    <v-app-bar-title>DataVaccine</v-app-bar-title>
+                    <v-spacer></v-spacer>
+                    <v-btn color="primary" text href="iniciarSesion.jsp">Iniciar Sesión</v-btn>
+                    <v-btn color="secondary" text href="registro.jsp">Crea una Cuenta</v-btn>
+                </v-app-bar>
 
 
-            <v-main>
-                <v-container style="height: 2000px;">
-                    <v-row>
-                        <v-col cols="12">
-                            Aca iría una pagina de información la cual explique que es DataVaccine
-                        </v-col>
-                    </v-row>
-                </v-container>
-            </v-main>
+                <v-main>
+                    <v-container style="height: 2000px;">
+                        <v-row>
+                            <v-col cols="12">
 
-        </v-app>
 
-    </div>
-    <script>
-        new Vue({
-            el: '#app',
-            vuetify: new Vuetify({
-                theme: {
-                    themes: {
-                        light: {
-                            primary: '#060537',
-                            secondary: '#2C2A87',
-                            accent: '#FF5023',
-                            error: '#FF5252',
-                            info: '#2196F3',
-                            success: '#4CAF50',
-                            warning: '#FFC107',
+                                <section>
+                                    <v-parallax src="./img/baner.jpeg" height="600">
+                                        <v-layout column align-center justify-center class="white--text">
+                                            <h1 class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">DataVaccine</h1>
+                                            <div class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">¡Vacunate de información!</div>
+                                        </v-layout>
+                                    </v-parallax>
+                                </section>
+
+                                <section>
+                                    <v-layout
+                                        column
+                                        wrap
+                                        class="my-5"
+                                        align-center
+                                        >
+                                        <v-flex xs12 sm4 class="my-3">
+                                            <div class="text-xs-center">
+                                                <h2 class="headline" align="center">¿Qué origino a DataVaccine?</h2>
+                                                <div style="text-align: justify">
+                                                    <span class="subheading">
+                                                        Desde que inició la pandemia debido al sars covid-19, se han desarrollado distintas 
+                                                        vacunas para contrarrestar dicha enfermedad. Por este motivo muchas personas han tenido 
+                                                        la necesidad de saber información de las vacunas, al igual que las reacciones adversas que 
+                                                        estás pueden generar. Por esta razón, se desea crear la plataforma DataVaccine la cual estará 
+                                                        destinada a brindar información no solo de las vacunas, sino que también brindará información sobre 
+                                                        las reacciones adversas que a una persona le pueda dar en función a sus condiciones, como la edad, género, 
+                                                        entre otros aspectos.
+                                                    </span>
+                                                </div>
+                                                <div class="img1" align="center">
+                                                    <img  src="./img/covid.jpeg" width="600" height="300" alt="covid-19" />
+                                                </div>
+                                            </div>
+                                        </v-flex>
+
+                                        <v-flex xs12 sm4 class="my-3">
+                                            <div class="text-xs-center">
+                                                <h2 class="headline" align="center">¿Qué es? y ¿Qué busca DataVaccine?</h2>
+                                                <div style="text-align: justify">
+                                                    <span class="subheading">
+                                                        DataVaccine es una plataforma web con el objetivo
+                                                        apoyar a la comunidad 
+                                                        de usuarios para que puedan obtener los medios 
+                                                        de información suficientes acerca de las vacunas 
+                                                        y su aplicación. Además de que las personas que 
+                                                        se hayan aplicado cierta vacuna brinden las 
+                                                        experiencias que han tenido, y de esta manera 
+                                                        poder crear una mayor conciencia y responsabilidad 
+                                                        en la campaña de vacunación.
+                                                    </span>
+                                                </div>
+                                                <div class="img1" align="center">
+                                                    <img  src="./img/img1.jpg" width="600" height="300" alt="vacuna" />
+                                                </div>
+                                            </div>
+                                        </v-flex>
+
+                                        <v-flex xs12>
+                                            <h2 class="headline" align="center">DataVaccine ofrece</h2>
+                                            <v-container grid-list-xl>
+                                                <v-layout row wrap align-center>
+                                                    <v-flex xs12 md4>
+                                                        <v-card class="elevation-0 transparent">
+                                                            <v-card-text class="text-xs-center">
+                                                                <v-icon x-large class="blue--text text--lighten-2">public</v-icon>
+                                                            </v-card-text>
+                                                            <v-card-title primary-title class="layout justify-center">
+                                                                <div class="headline text-xs-center">Foro</div>
+                                                            </v-card-title>
+                                                            <v-card-text>
+                                                                Comparte tu experiencia con la comunidad   
+                                                            </v-card-text>
+                                                        </v-card>
+                                                    </v-flex>
+                                                    <v-flex xs12 md4>
+                                                        <v-card class="elevation-0 transparent">
+                                                            <v-card-text class="text-xs-center">
+                                                                <v-icon x-large class="blue--text text--lighten-2">analytics</v-icon>
+                                                            </v-card-text>
+                                                            <v-card-title primary-title class="layout justify-center">
+                                                                <div class="headline">Estadísticas</div>
+                                                            </v-card-title>
+                                                            <v-card-text>
+                                                                Consulta gráficas de vacunación y gráficas de reacciones
+                                                            </v-card-text>
+                                                        </v-card>
+                                                    </v-flex>
+                                                    <v-flex xs12 md4>
+                                                        <v-card class="elevation-0 transparent">
+                                                            <v-card-text class="text-xs-center">
+                                                                <v-icon x-large class="blue--text text--lighten-2">percentage</v-icon>
+
+                                                            </v-card-text>
+                                                            <v-card-title primary-title class="layout justify-center">
+                                                                <div class="headline text-xs-center">Calculadora</div>
+                                                            </v-card-title>
+                                                            <v-card-text>
+                                                                Calcula la probabilidad de tener una reacción adversa    
+                                                            </v-card-text>
+                                                        </v-card>
+                                                    </v-flex>
+                                                </v-layout>
+                                            </v-container>
+                                        </v-flex>
+
+                                        <v-flex xs12>
+                                            <v-container grid-list-xl>
+                                                <v-layout row wrap align-center>
+                                                    <v-flex xs12 md4>
+                                                        <v-card class="elevation-0 transparent">
+                                                            <v-card-text class="text-xs-center">
+                                                                <v-icon x-large class="blue--text text--lighten-2">newspaper</v-icon>
+                                                            </v-card-text>
+                                                            <v-card-title primary-title class="layout justify-center">
+                                                                <div class="headline text-xs-center">Noticias</div>
+                                                            </v-card-title>
+                                                            <v-card-text>
+                                                                Información Relacionada a las vacunas, emitida por dependencias verificadas   
+                                                            </v-card-text>
+                                                        </v-card>
+                                                    </v-flex>
+                                                    <v-flex xs12 md4>
+                                                        <v-card class="elevation-0 transparent">
+                                                            <v-card-text class="text-xs-center">
+                                                                <v-icon x-large class="blue--text text--lighten-2">lock</v-icon>
+                                                            </v-card-text>
+                                                            <v-card-title primary-title class="layout justify-center">
+                                                                <div class="headline">Seguridad</div>
+                                                            </v-card-title>
+                                                            <v-card-text>
+                                                                Los datos que nos proporciones son almacenados de forma segura y no 
+                                                                se utilizan con fines secundarios 
+                                                            </v-card-text>
+                                                        </v-card>
+                                                    </v-flex>
+                                                    <v-flex xs12 md4>
+                                                        <v-card class="elevation-0 transparent">
+                                                            <v-card-text class="text-xs-center">
+                                                                <v-icon x-large class="blue--text text--lighten-2">laptop</v-icon>
+
+                                                            </v-card-text>
+                                                            <v-card-title primary-title class="layout justify-center">
+                                                                <div class="headline text-xs-center">Registro de vacunas</div>
+                                                            </v-card-title>
+                                                            <v-card-text>
+                                                                Contamos con datos de todas las vacunas que han sido aprobadas por
+                                                                el Gobierno de México
+                                                            </v-card-text>
+                                                        </v-card>
+                                                    </v-flex>
+                                                </v-layout>
+                                            </v-container>
+                                        </v-flex>
+
+                                    </v-layout>
+                                </section>
+
+
+
+                                <section>
+                                    <h2 class="headline" align="center">Social</h2>
+                                    <v-parallax src="./img/img3.jpg" height="380">
+                                        <v-layout column align-center justify-center>
+                                            <div class="headline white--text mb-3 text-xs-center">Encuentranos en las redes </div>
+                                        </v-layout>
+                                        <v-layout justify-space-around justify-center>
+
+                                            <v-icon x-large white>fab fa-facebook-f</v-icon>
+
+                                            <v-icon x-large white>fab fa-twitter</v-icon>
+
+                                            <v-icon x-large white>fab fa-reddit-alien</v-icon>
+
+                                            <v-icon x-large white>fab fa-instagram</v-icon>
+
+                                            <v-icon x-large white>fab fa-discord</v-icon>
+                                        </v-layout>
+                                    </v-parallax>
+                                </section>
+
+                                <section>
+                                    <v-container grid-list-xl>
+                                        <v-layout row wrap justify-center class="my-5">
+                                            <v-flex xs12 sm4>
+                                                <v-card class="elevation-0 transparent">
+                                                    <v-card-title primary-title class="layout justify-center">
+                                                        <div class="headline">Equipo DataVaccine</div>
+                                                    </v-card-title>
+                                                    <v-card-text>
+                                                        Bolaños Ramos Caleb Salómon,
+                                                        García Marciano Edgar,
+                                                        Hernández Oble Axel y
+                                                        Olay Silis José Eduardo.
+                                                    </v-card-text>
+                                                </v-card>
+                                            </v-flex>
+                                            <v-flex xs12 sm4 offset-sm1>
+                                                <v-card class="elevation-0 transparent">
+                                                    <v-card-title primary-title class="layout justify-center">
+                                                        <div class="headline">Datos Académicos</div>
+                                                    </v-card-title>
+                                                    <v-card-text>
+                                                        Instituto Politécnico Nacional,
+                                                        Escuela Superior de Cómputo,
+                                                        Asignatura: A.D.O.O.,
+                                                        Dorantes Gonzáles Marco Antonio,
+                                                        2CM15
+                                                    </v-card-text>
+                                                </v-card>
+                                            </v-flex>
+                                        </v-layout>
+                                    </v-container>
+                                </section>
+
+                                <section>
+                                    <v-container grid-list-md>
+
+
+                                        <v-layout row wrap>
+                                            <v-flex xs12 text-xs-center class="mt-5">
+                                                <div class="headline" align="center">¿Dudas o comentarios?</div>
+                                                <br>
+                                                <div align="center">Ingresa tu correo y la duda o comentario que tengas hacia la plataforma, apreciamos mucho los 
+                                                    comentarios de nuestros usuarios.
+                                                </div>
+                                            </v-flex>
+                                            <v-flex xs8 offset-xs2>
+
+                                                <v-card class="elevation-0 transparent">
+
+                                                    <v-card-text>
+                                                        <v-flex xs12 v-if="!subscribed">
+                                                            <v-text-field box label="Correo " rules="emailRules" v-model="email" hint="Ingresa tu correo" persistent-hint></v-text-field>
+                                                        </v-flex>
+                                                        <v-flex xs12 v-if="!subscribed">
+                                                            <v-text-field box multi-line label="Comentarios"></v-text-field>
+                                                        </v-flex>
+                                                        <v-flex xs12 class="text-xs-center" v-if="!subscribed">
+                                                            <v-btn class="blue lighten-2 mb-5" dark large @click="subscribe">Ponerme en contacto</v-btn>
+                                                        </v-flex>
+                                                        <v-flex xs12 class="text-xs-center" v-if="subscribed">
+                                                            <v-btn class="green lighten-2 mb-5" dark large>Gracias por tu comentario!</v-btn>
+                                                        </v-flex>
+                                                    </v-card-text>
+
+                                                </v-card>
+
+                                            </v-flex>
+                                        </v-layout>
+                                    </v-container>
+                                </section>
+
+
+
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-main>
+
+            </v-app>
+
+        </div>
+        <script>
+            new Vue({
+                el: '#app',
+                vuetify: new Vuetify({
+                    theme: {
+                        themes: {
+                            light: {
+                                primary: '#060537',
+                                secondary: '#2C2A87',
+                                accent: '#FF5023',
+                                error: '#FF5252',
+                                info: '#2196F3',
+                                success: '#4CAF50',
+                                warning: '#FFC107',
+                            },
                         },
                     },
+                }),
+            })
+        </script>
+        
+        <script>
+            export default {
+                name: "App",
+                data: function () {
+                    return {
+                        title: "Endorfine",
+                        imageLink: {
+                            main:
+                                    "https://firebasestorage.googleapis.com/v0/b/endorfinevue.appspot.com/o/assets%2Fb13f0434-b228-11e6-8e5d-5252025056ab_web_scale_0.4666667_0.4666667__.jpg?alt=media&token=660df23e-599e-434b-9313-ba69c973eeea",
+                            sub_main:
+                                    "https://firebasestorage.googleapis.com/v0/b/endorfinevue.appspot.com/o/assets%2FNight-Club-Clubbing-Jobs-Abroad2.jpg?alt=media&token=82bbda7d-5df4-430b-9217-adaf1c8485c5",
+                            logo:
+                                    "https://firebasestorage.googleapis.com/v0/b/endorfinevue.appspot.com/o/assets%2Fandroid-chrome-512x512.png?alt=media&token=8a0a66f6-4741-4ff6-8f28-eb9ec74374df",
+                            social_cover:
+                                    "https://firebasestorage.googleapis.com/v0/b/endorfinevue.appspot.com/o/assets%2Fo-NIGHTCLUB-facebook.jpg?alt=media&token=cefc5c4c-9714-41da-9c22-f63caf5e89a4"
+                        },
+                        email: "",
+                        emailRules: [
+                            v => {
+                                return !!v || "E-mail is required";
+                            },
+                            v =>
+                                /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+                                        "E-mail must be valid"
+                        ],
+                        subscribed: false
+                    };
                 },
-            }),
-        })
-    </script>
-</body>
+                methods: {
+                    subscribe: function () {
+                        this.subscribed = !this.subscribed;
+                    }
+                },
+
+                computed: {
+                    imgHeight: function () {
+                        var offset = 320;
+                        console.log("new image height is " + (this.pageHeight - offset));
+                        return this.pageHeight - offset;
+                    }
+                },
+
+                mounted: function () {
+                    this.calculateHeight();
+                }
+            };
+        </script>
+
+
+    </body>
 
 </html>
