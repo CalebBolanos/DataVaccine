@@ -2,7 +2,7 @@
     Document   : inicio
     Created on : 24 nov. 2021, 12:24:39
     Author     : caleb
---%> 
+--%>
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
         <!DOCTYPE html>
         <html>
@@ -176,32 +176,29 @@
                                 <v-col>
                                     <h2>Ultimas noticias</h2>
                                 </v-col>
-                                <template v-for="n in 3">
-                                            <v-col sm="12" cols="12" :key="n">
+                                <template v-for="(articulo, i) in articulos">
+                                            <v-col sm="12" cols="12" :key="'a'+i">
                                                 <v-card class="d-flex align-center">
                                                     <div class="d-flex justify-space-between flex-wrap flex-md-nowrap flex-column flex-md-row">
                                                         <div class="mx-auto">
-                                                            <v-img width="220" height="100%" src="../img/logo_full.png"></v-img>
+                                                            <v-img width="220" height="100%" :src="articulo.urlToImage"></v-img>
                                                         </div>
                                                         <v-divider :vertical="$vuetify.breakpoint.mdAndUp"></v-divider>
                                                         <div>
                                                             <v-card-title>
-                                                                Noticia {{n}}
+                                                                {{articulo.title}}
                                                             </v-card-title>
                                                             <v-card-text>
-                                                                Resumen de noticia
+                                                                {{articulo.description}}
                                                             </v-card-text>
                                                             <v-card-text class="text--primary text-base">
-                                                                <span>Fuente:</span> <span class="font-weight-bold">Pagina</span>
+                                                                <span>Fuente:</span> <span class="font-weight-bold">{{articulo.source.name}}</span>
                                                             </v-card-text>
                                                             <v-card-actions class="d-flex justify-space-between dense">
-                                                                <v-btn text color="primary" dark>
-                                                                    <v-icon>mdi-account</v-icon>
+                                                                <v-btn text color="primary" dark :href="articulo.url" target="_blank">
+                                                                    <v-icon>mdi-newspaper-variant-multiple</v-icon>
                                                                     <span class="ms-2">Leer noticia</span>
-                                                                </v-btn>
-                                                                <v-btn icon>
-                                                                    <v-icon>mdi-account</v-icon>
-                                                                </v-btn>
+                                                                </v-btn> 
                                                             </v-card-actions>
                                                         </div>
                                                     </div>
@@ -236,12 +233,13 @@
                                     }
                                 }]
                             }
-                        }
+                        },
+
                     }),
 
                     mounted() {
                         this.renderChart(this.chartdata, this.options)
-                    }
+                    },
 
                 })
 
@@ -250,7 +248,37 @@
                     data: () => ({
                         drawer: false,
                         group: 0,
+                        //noticias
+                        newsApiUrl: '',
+                        nombreVacunaBusqueda: 'covid', //url encoded
+                        totalResultados: 0,
+                        articulos: [],
                     }),
+
+                    methods: {
+                        obtenerNoticias() {
+                            this.newsApiUrl = 'https://newsapi.org/v2/top-headlines?country=mx&q=' + this.nombreVacunaBusqueda + '&apiKey=1234a106a9e147999185398c876a42fe';
+
+                            let request = new Request(this.newsApiUrl);
+
+                            fetch(request)
+                                .then((response) => response.json())
+                                .then((data) => {
+                                    this.totalResultados = data.totalResults;
+                                    data.articles.forEach(element => {
+                                        this.articulos.push(element);
+                                    });
+                                })
+                                .catch((error) => {
+                                    console.log(error)
+                                })
+
+                        }
+                    },
+
+                    created() {
+                        this.obtenerNoticias();
+                    },
                     vuetify: new Vuetify({
                         theme: {
                             themes: {
@@ -268,6 +296,6 @@
                     }),
                 })
             </script>
-        </body>
+        </body> 
 
         </html>
