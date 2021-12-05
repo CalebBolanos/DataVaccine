@@ -128,6 +128,7 @@
 
                                     <!-- tabs item -->
                                     <v-tabs-items v-model="tab">
+                                        <!-- cuenta -->
                                         <v-tab-item>
                                             <v-card flat class="pa-3 mt-2">
                                                 <v-card-text class="d-flex">
@@ -141,96 +142,77 @@
                                                             <v-icon class="d-sm-none">
                                                                 mdl-account
                                                             </v-icon>
-                                                            <span class="d-none d-sm-block">Upload new photo</span>
+                                                            <span class="d-none d-sm-block">Subir nueva foto</span>
                                                         </v-btn>
 
                                                         <input ref="refInputEl" type="file" accept=".jpeg,.png,.jpg,GIF" :hidden="true" />
 
                                                         <v-btn color="error" outlined class="mt-5">
-                                                            Reset
+                                                            Eliminar foto actual
                                                         </v-btn>
                                                         <p class="text-sm mt-5">
-                                                            Allowed JPG, GIF or PNG. Max size of 800K
+                                                            Formatos permitidos: JPG, GIF o PNG. Tamaño máximo de 800K
                                                         </p>
                                                     </div>
                                                 </v-card-text>
 
                                                 <v-card-text>
-                                                    <v-form class="multi-col-validation mt-6">
+                                                    <form method="POST" action="ProcesarRegistro">
                                                         <v-row>
-                                                            <v-col md="6" cols="12">
-                                                                <v-text-field label="Username" dense outlined></v-text-field>
-                                                            </v-col>
-
-                                                            <v-col md="6" cols="12">
-                                                                <v-text-field label="Name" dense outlined></v-text-field>
-                                                            </v-col>
-
                                                             <v-col cols="12" md="6">
-                                                                <v-text-field label="E-mail" dense outlined></v-text-field>
+                                                                <v-text-field readonly v-model="strCorreo" prepend-inner-icon="mdi-email" name="correo" label="Correo electrónico" type="text" outlined class="mt-4" required :rules="[strCorreo => !!strCorreo || 'Este campo es requerido']"></v-text-field>
                                                             </v-col>
-
                                                             <v-col cols="12" md="6">
-                                                                <v-text-field dense label="Role" outlined></v-text-field>
+                                                                <v-text-field v-model="strNombre" prepend-inner-icon="mdi-account" name="nombre" label="Nombre(s)" type="text" outlined class="mt-4" required :rules="[strNombre => !!strNombre || 'Este campo es requerido']"></v-text-field>
                                                             </v-col>
-
                                                             <v-col cols="12" md="6">
-                                                                <v-select dense outlined label="Status" :items="status"></v-select>
+                                                                <v-text-field v-model="strPaterno" prepend-inner-icon="mdi-account" name="paterno" label="Apellido Paterno" type="text" outlined required :rules="[strPaterno => !!strPaterno || 'Este campo es requerido']"></v-text-field>
                                                             </v-col>
-
                                                             <v-col cols="12" md="6">
-                                                                <v-text-field dense outlined label="Company"></v-text-field>
+                                                                <v-text-field v-model="strMaterno" prepend-inner-icon="mdi-account" name="materno" label="Apellido Materno" type="text" outlined required :rules="[strMaterno => !!strMaterno || 'Este campo es requerido']"></v-text-field>
                                                             </v-col>
-
-                                                            <!-- alert -->
-                                                            <v-col cols="12">
-                                                                <v-alert color="warning" text class="mb-0">
-                                                                    <div class="d-flex align-start">
-                                                                        <v-icon color="warning">
-                                                                            mdl-warning
-                                                                        </v-icon>
-
-                                                                        <div class="ms-3">
-                                                                            <p class="text-base font-weight-medium mb-1">
-                                                                                Your email is not confirmed. Please check your inbox.
-                                                                            </p>
-                                                                            <a href="javascript:void(0)" class="text-decoration-none warning--text">
-                                                                                <span class="text-sm">Resend Confirmation</span>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </v-alert>
+                                                            <v-col cols="12" md="6">
+                                                                <v-text-field v-model="intEdad" prepend-inner-icon="mdi-account" name="edad" label="Edad" type="number" outlined required suffix="años" :rules="reglasEdad"></v-text-field>
+                                                            </v-col>
+                                                            <v-col cols="12" md="6">
+                                                                <v-radio-group v-model="genero" row name="genero">
+                                                                    <template v-slot:label>
+                                                                        <div>Genero:</div>
+                                                                    </template>
+                                                                    <v-radio label="Masculino" value="Masculino">
+                                                                    </v-radio>
+                                                                    <v-radio label="Femenino" value="Femenino">
+                                                                    </v-radio>
+                                                                </v-radio-group>
                                                             </v-col>
 
                                                             <v-col cols="12">
                                                                 <v-btn color="primary" class="me-3 mt-4">
-                                                                    Save changes
+                                                                    Guardar cambios
                                                                 </v-btn>
-                                                                <v-btn color="secondary" outlined class="mt-4" type="reset" @click.prevent="resetForm">
-                                                                    Cancel
+                                                                <v-btn color="secondary" outlined class="mt-4" @click="resetearDatosCuenta">
+                                                                    Cancelar
                                                                 </v-btn>
                                                             </v-col>
                                                         </v-row>
-                                                    </v-form>
+                                                    </form>
                                                 </v-card-text>
                                             </v-card>
                                         </v-tab-item>
-
+                                        <!-- cambio de contraseña -->
                                         <v-tab-item>
                                             <v-card flat class="mt-5">
-                                                <v-form>
+                                                <form method="POST" action="ProcesarRegistro">
                                                     <div class="px-3">
                                                         <v-card-text class="pt-5">
                                                             <v-row>
                                                                 <v-col cols="12" sm="8" md="6">
-                                                                    <!-- current password -->
-                                                                    <v-text-field v-model="currentPassword" :type="isCurrentPasswordVisible ? 'text' : 'password'" :append-icon="isCurrentPasswordVisible ? 'mdl-account':'mdl-account'" label="Current Password" outlined dense @click:append="isCurrentPasswordVisible = !isCurrentPasswordVisible"></v-text-field>
-
-                                                                    <!-- new password -->
-                                                                    <v-text-field v-model="newPassword" :type="isNewPasswordVisible ? 'text' : 'password'" :append-icon="isNewPasswordVisible ? 'mdl-account':'mdl-account'" label="New Password" outlined dense hint="Make sure it's at least 8 characters." persistent-hint @click:append="isNewPasswordVisible = !isNewPasswordVisible"></v-text-field>
-
-                                                                    <!-- confirm password -->
-                                                                    <v-text-field v-model="cPassword" :type="isCPasswordVisible ? 'text' : 'password'" :append-icon="isCPasswordVisible ? 'mdl-account':'mdl-account'" label="Confirm New Password" outlined dense class="mt-3" @click:append="isCPasswordVisible = !isCPasswordVisible"></v-text-field>
+                                                                    <v-text-field v-model="contrasenaAntigua" prepend-inner-icon="mdi-lock" name="contrasena" label="Escribe tu contraseña actual" outlined :append-icon="verContra ? 'mdi-eye' : 'mdi-eye-off'" :type="verContra ? 'text' : 'password'" @click:append="verContra = !verContra" required :rules="[contrasena1 => !!contrasena1 || 'Este campo es requerido']"
+                                                                                  /></v-text-field>
+                                                                    <v-text-field v-model="contrasena1" prepend-inner-icon="mdi-lock" name="contrasena" label="Escribe tu nueva contraseña" outlined :append-icon="ver ? 'mdi-eye' : 'mdi-eye-off'" :type="ver ? 'text' : 'password'" @click:append="ver = !ver" required :rules="[contrasena1 => !!contrasena1 || 'Este campo es requerido']"
+                                                                                  /></v-text-field>
+                                                                    <v-text-field v-model="contrasena2" prepend-inner-icon="mdi-lock" name="contrasena2" label="Vuelve a escribir tu nueva contraseña" outlined :append-icon="ver2 ? 'mdi-eye' : 'mdi-eye-off'" :type="ver ? 'text' : 'password'" @click:append="ver = !ver" required
+                                                                                  :rules="[contrasena1 == contrasena2 || 'Las contraseñas deben ser iguales']" /></v-text-field>
                                                                 </v-col>
 
                                                                 <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">
@@ -248,58 +230,56 @@
                                                         <!-- action buttons -->
                                                         <v-card-text>
                                                             <v-btn color="primary" class="me-3 mt-3">
-                                                                Save changes
-                                                            </v-btn>
-                                                            <v-btn color="secondary" outlined class="mt-3">
-                                                                Cancel
+                                                                Cambiar contraseña
                                                             </v-btn>
                                                         </v-card-text>
                                                     </div>
-                                                </v-form>
+                                                </form>
                                             </v-card>
                                         </v-tab-item>
-
+                                        <!-- datos medicos-->
                                         <v-tab-item>
                                             <v-card flat class="pa-3 mt-2">
                                                 <v-form class="multi-col-validation">
                                                     <v-card-text class="pt-5">
                                                         <v-row>
-                                                            <v-col cols="12">
-                                                                <v-textarea outlined rows="3" label="Bio"></v-textarea>
+                                                            <v-col cols="12" md="6">
+                                                                <v-text-field v-model="strFolio" prepend-inner-icon="mdi-account" name="folio" label="Folio de registro MiVacuna (opcional)" type="text" outlined class="mt-4" ></v-text-field>
                                                             </v-col>
 
                                                             <v-col cols="12" md="6">
-                                                                <v-text-field outlined dense label="Birthday"></v-text-field>
+                                                                <v-text-field v-model="intAltura" prepend-inner-icon="mdi-human-male-height" name="altura" label="Altura" type="number" step=".01" outlined required suffix="m" :rules="[intAltura => !!intAltura || 'Este campo es requerido']"></v-text-field>
                                                             </v-col>
 
                                                             <v-col cols="12" md="6">
-                                                                <v-text-field outlined dense label="Phone"></v-text-field>
+                                                                <v-text-field v-model="intPeso" prepend-inner-icon="mdi-weight-kilogram" name="peso" label="Peso" type="number" step=".01" outlined class="mt-4" required suffix="kg" :rules="[intPeso => !!intPeso || 'Este campo es requerido']"></v-text-field>
                                                             </v-col>
 
                                                             <v-col cols="12" md="6">
-                                                                <v-text-field outlined dense label="Website"></v-text-field>
+                                                                <v-combobox
+                                                                    v-model="grupoSanguineo"
+                                                                    :items="itemsGrupoSanguineo"
+                                                                    label="Grupo sanguíneo"
+                                                                    name="grupoSanguineo"
+                                                                    outlined
+                                                                    required
+                                                                    ></v-combobox>
                                                             </v-col>
 
                                                             <v-col cols="12" md="6">
-                                                                <v-select outlined dense label="Country" :items="['USA','UK','AUSTRALIA','BRAZIL']"></v-select>
+                                                                <v-combobox
+                                                                    v-model="alergias"
+                                                                    :items="itemsAlergias"
+                                                                    label="Alergias (opcional)"
+                                                                    name="alergias"
+                                                                    outlined
+                                                                    multiple
+                                                                    chips
+                                                                    ></v-combobox>
                                                             </v-col>
 
                                                             <v-col cols="12" md="6">
-                                                                <v-select outlined dense multiple chips small-chips label="Languages" :items="['English','Spanish','French','German']"></v-select>
-                                                            </v-col>
 
-                                                            <v-col cols="12" md="6">
-                                                                <p class="text--primary mt-n3 mb-2">
-                                                                    Gender
-                                                                </p>
-                                                                <v-radio-group row class="mt-0" hide-details>
-                                                                    <v-radio value="male" label="Male">
-                                                                    </v-radio>
-                                                                    <v-radio value="female" label="Female">
-                                                                    </v-radio>
-                                                                    <v-radio value="other" label="Other">
-                                                                    </v-radio>
-                                                                </v-radio-group>
                                                             </v-col>
                                                         </v-row>
                                                     </v-card-text>
@@ -333,7 +313,7 @@ new Vue({
             nombreUsuario: 'Nombre de usuario',
             correo: '<%=correo%>',
             imagenUsuario: 'https://themeselection.com/demo/materio-vuetify-vuejs-admin-template-free/demo/img/1.e2938115.png',
-            
+
             tab: '',
             tabs: [{
                     title: 'Cuenta',
@@ -342,6 +322,47 @@ new Vue({
                 }, {
                     title: 'Datos médicos',
                 }, ],
+
+            strCorreo: 'bolanos.c@hotmail.com',
+            contrasenaAntigua: '',
+            contrasena1: '',
+            contrasena2: '',
+            verContra: false,
+            ver: false,
+            ver2: false,
+
+            strNombre: 'Caleb',
+            strPaterno: 'Bolaños',
+            strMaterno: 'Ramos',
+            intEdad: 20,
+            reglasEdad: [
+                v => !!v || "Este campo es requerido",
+                v => (v && v >= 18) || "Debes de tener al menos 18 años",
+            ],
+            genero: 'Masculino',
+
+            strFolio: '',
+            intAltura: null,
+            intPeso: null,
+            grupoSanguineo: '',
+            itemsGrupoSanguineo: [
+                'A-',
+                'A+',
+                'B-',
+                'B+',
+                'O-',
+                'O+',
+                'AB-',
+                'AB+',
+            ],
+            alergias: [],
+            itemsAlergias: [
+                'Programming',
+                'Design',
+                'Vue',
+                'Vuetify',
+            ],
+
             status: ['Active', 'Inactive', 'Pending', 'Closed'],
             isCurrentPasswordVisible: false,
             isNewPasswordVisible: false,
@@ -350,6 +371,15 @@ new Vue({
             newPassword: false,
             cPassword: false,
         }),
+    methods: {
+        resetearDatosCuenta() {
+            this.strNombre = 'Caleb'
+            this.strPaterno = 'Bolaños'
+            this.strMaterno = 'Ramos'
+            this.intEdad = 20
+            this.genero = 'Masculino'
+        }
+    },
     vuetify: new Vuetify({
         theme: {
             themes: {
