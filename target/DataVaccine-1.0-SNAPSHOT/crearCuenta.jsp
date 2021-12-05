@@ -137,7 +137,7 @@
                                                 <span class="me-2">
                                                     ¿Ya tienes una cuenta?
                                                 </span>
-                                                <a href="iniciarSesion" style="color:#FF5023">Iniciar Sesión</a>
+                                                <a href="iniciarSesion.jsp" style="color:#FF5023">Iniciar Sesión</a>
                                             </span>
                                         </v-card-text>
                                     </v-card>

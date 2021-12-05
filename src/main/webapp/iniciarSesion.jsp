@@ -63,7 +63,7 @@
                                                 <span class="me-2">
                                                     ¿Aún no estas registrado?
                                                 </span>
-                                                <a href="crearCuenta" style="color:#FF5023">Crea una cuenta aqui</a>
+                                                <a href="crearCuenta.jsp" style="color:#FF5023">Crea una cuenta aqui</a>
                                             </span>
                                         </v-card-text>
                                     </v-card>
