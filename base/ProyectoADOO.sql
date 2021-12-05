@@ -10,7 +10,7 @@ CREATE TABLE DatosMedicos
   idDatos INT NOT NULL,
   Altura float NOT NULL,
   Peso float NOT NULL,
-  Alergias varchar(50) NOT NULL,
+  Alergias varchar(50) NULL,
   TipoSangre varchar(10) NOT NULL,
   PRIMARY KEY (idDatos)
 );
@@ -67,12 +67,12 @@ CREATE TABLE Usario
   ApellidoM varchar(50) NOT NULL,
   Edad INT NOT NULL,
   Genero varchar(20) NOT NULL,
-  Folio varchar(50) NOT NULL,
+  Folio varchar(50) NULL,
   Foto varchar(500) NOT NULL,
   Correo varchar(50) NOT NULL,
   Contraseña varchar(10) NOT NULL,
   idDatos INT NOT NULL,
-  PRIMARY KEY (idCliente),
+  PRIMARY KEY (idUsuario),
   FOREIGN KEY (idDatos) REFERENCES DatosMedicos(idDatos),
   UNIQUE (Folio)
 );
@@ -93,10 +93,10 @@ CREATE TABLE Vacunas
 
 CREATE TABLE Consulta
 (
-  idCliente INT NOT NULL,
+  idUsuario INT NOT NULL,
   idVacuna INT NOT NULL,
-  PRIMARY KEY (idCliente, idVacuna),
-  FOREIGN KEY (idCliente) REFERENCES Usario(idCliente),
+  PRIMARY KEY (idUsuario, idVacuna),
+  FOREIGN KEY (idUsuario) REFERENCES Usario(idUsuario),
   FOREIGN KEY (idVacuna) REFERENCES Vacunas(idVacuna)
 );
 

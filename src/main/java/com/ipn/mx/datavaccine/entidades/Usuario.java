@@ -21,5 +21,14 @@ public class Usuario implements Serializable{
     private String paterno;
     private String materno;
     private String genero;
-    
+    private int edad;
+    private String correo;
+    private String contraseña;
+    private String folio;
+    private String foto;
+    private float altura;
+    private float peso;
+    private String alergias;
+    private String grupoSanguineo;
+    private int claveDatosMedicos;
 }
