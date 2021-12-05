@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ipn.mx.datavaccine.controlador;
+package com.ipn.mx.datavaccine.controlador.usuario;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author caleb
  */
-@WebServlet(name = "ProcesarInicioSesion", urlPatterns = {"/ProcesarInicioSesion"})
-public class ProcesarInicioSesion extends HttpServlet {
+@WebServlet(name = "configuracionCuenta", urlPatterns = {"/usr/configuracionCuenta"})
+public class configuracionCuenta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +33,15 @@ public class ProcesarInicioSesion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession sesion = request.getSession();
+        if (sesion.getAttribute("correo") == null) {
+            response.sendRedirect("../iniciarSesion.jsp");
+            return;
+        }
+        
+        RequestDispatcher rd = request.getRequestDispatcher("configuracionCuenta.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,7 +57,6 @@ public class ProcesarInicioSesion extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        response.sendRedirect("index.html");
     }
 
     /**
@@ -63,25 +71,6 @@ public class ProcesarInicioSesion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
-        if (!request.getParameter("usuario").equals("") && !request.getParameter("contrasena").equals("")) {
-            String correoUsuario = new String(request.getParameter("usuario").getBytes(), "UTF-8");
-            String contrasena = new String(request.getParameter("contrasena").getBytes(), "UTF-8");
-
-            System.out.println(correoUsuario);
-            System.out.println(contrasena);
-
-            //en esta parte hacer la consulta del dao y dto para obtener todos los datos del usuario
-            
-            HttpSession sesion = request.getSession();
-            
-            sesion.setAttribute("correo", correoUsuario);
-            
-            response.sendRedirect("./usr/inicio");
-        }else{
-            response.sendRedirect("iniciarSesion.jsp?msg=a");
-        }
-
     }
 
     /**
