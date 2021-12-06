@@ -10,5 +10,4 @@ com/ipn/mx/datavaccine/dao/Vacunadao.class
 com/ipn/mx/datavaccine/controlador/usuario/configuracionCuenta.class
 com/ipn/mx/datavaccine/controlador/usuario/inicio.class
 com/ipn/mx/datavaccine/controlador/usuario/vacuna.class
-.netbeans_automatic_build
 com/ipn/mx/datavaccine/controlador/ProcesarInicioSesion.class

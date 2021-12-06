@@ -70,11 +70,13 @@ public class ProcesarRegistro extends HttpServlet {
             dtoUsuario.getEntidad().setEdad(Integer.parseInt(request.getParameter("edad")));
             dtoUsuario.getEntidad().setCorreo(request.getParameter("correo"));
             dtoUsuario.getEntidad().setContrasena(request.getParameter("contrasena"));
-            dtoUsuario.getEntidad().setFolio(request.getParameter("folio"));
+            dtoUsuario.getEntidad().setFolio(request.getParameter("folio").equals("") ? null : request.getParameter("folio"));
             dtoUsuario.getEntidad().setAltura(Float.parseFloat(request.getParameter("altura")));
             dtoUsuario.getEntidad().setPeso(Float.parseFloat(request.getParameter("peso")));
-            dtoUsuario.getEntidad().setAlergias(request.getParameter("grupoSanguineo"));
-            dtoUsuario.getEntidad().setGrupoSanguineo(request.getParameter("alergias"));
+            dtoUsuario.getEntidad().setAlergias(request.getParameter("alergias"));
+            dtoUsuario.getEntidad().setGrupoSanguineo(request.getParameter("grupoSanguineo"));
+            
+            
             
             System.out.println(dtoUsuario.getEntidad().toString());
             

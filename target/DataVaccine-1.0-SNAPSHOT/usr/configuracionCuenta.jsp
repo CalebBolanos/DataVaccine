@@ -4,6 +4,7 @@
     Author     : caleb
 --%>
 
+<%@page import="com.ipn.mx.datavaccine.dto.UsuarioDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     HttpSession sesionUsuario = request.getSession();
@@ -12,6 +13,7 @@
         return;
     }
     String correo = (String) sesionUsuario.getAttribute("correo");
+    UsuarioDTO dtoUsuario = (UsuarioDTO) sesionUsuario.getAttribute("dtoUsuario");
 %>
 <!DOCTYPE html> 
 <html>
@@ -310,7 +312,7 @@ new Vue({
     data: () => ({
             drawer: false,
             group: 2,
-            nombreUsuario: 'Nombre de usuario',
+            nombreUsuario: '<%=dtoUsuario.getEntidad().getNombreUsuario()%>',
             correo: '<%=correo%>',
             imagenUsuario: 'https://themeselection.com/demo/materio-vuetify-vuejs-admin-template-free/demo/img/1.e2938115.png',
 
@@ -323,7 +325,7 @@ new Vue({
                     title: 'Datos médicos',
                 }, ],
 
-            strCorreo: 'bolanos.c@hotmail.com',
+            strCorreo: '<%=dtoUsuario.getEntidad().getCorreo()%>',
             contrasenaAntigua: '',
             contrasena1: '',
             contrasena2: '',
@@ -331,20 +333,20 @@ new Vue({
             ver: false,
             ver2: false,
 
-            strNombre: 'Caleb',
-            strPaterno: 'Bolaños',
-            strMaterno: 'Ramos',
-            intEdad: 20,
+            strNombre: '<%=dtoUsuario.getEntidad().getNombreUsuario()%>',
+            strPaterno: '<%=dtoUsuario.getEntidad().getPaterno()%>',
+            strMaterno: '<%=dtoUsuario.getEntidad().getMaterno()%>',
+            intEdad: <%=dtoUsuario.getEntidad().getEdad()%>,
             reglasEdad: [
                 v => !!v || "Este campo es requerido",
                 v => (v && v >= 18) || "Debes de tener al menos 18 años",
             ],
-            genero: 'Masculino',
+            genero: '<%=dtoUsuario.getEntidad().getGenero()%>',
 
             strFolio: '',
-            intAltura: null,
-            intPeso: null,
-            grupoSanguineo: '',
+            intAltura: <%=dtoUsuario.getEntidad().getAltura()%>,
+            intPeso: <%=dtoUsuario.getEntidad().getPeso()%>,
+            grupoSanguineo: '<%=dtoUsuario.getEntidad().getGrupoSanguineo()%>',
             itemsGrupoSanguineo: [
                 'A-',
                 'A+',
@@ -355,7 +357,7 @@ new Vue({
                 'AB-',
                 'AB+',
             ],
-            alergias: [],
+            alergias: [<%=dtoUsuario.getEntidad().getAlergias()%>],
             itemsAlergias: [
                 'Programming',
                 'Design',

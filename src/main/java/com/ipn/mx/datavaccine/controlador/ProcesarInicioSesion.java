@@ -5,8 +5,13 @@
  */
 package com.ipn.mx.datavaccine.controlador;
 
+import com.ipn.mx.datavaccine.dao.UsuarioDAO;
+import com.ipn.mx.datavaccine.dto.UsuarioDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -72,13 +77,35 @@ public class ProcesarInicioSesion extends HttpServlet {
             System.out.println(contrasena);
 
             //en esta parte hacer la consulta del dao y dto para obtener todos los datos del usuario
-            
-            HttpSession sesion = request.getSession();
-            
-            sesion.setAttribute("correo", correoUsuario);
-            
-            response.sendRedirect("./usr/inicio");
-        }else{
+            UsuarioDAO daoUsuario = new UsuarioDAO();
+            UsuarioDTO dtoUsuario = new UsuarioDTO();
+
+            dtoUsuario.getEntidad().setCorreo(request.getParameter("usuario"));
+            dtoUsuario.getEntidad().setContrasena(request.getParameter("contrasena"));
+
+            try {
+                int idUsuario = daoUsuario.iniciarSesion(dtoUsuario);
+                if (idUsuario > 0) {
+                    dtoUsuario.getEntidad().setIdUsuario(idUsuario);
+                    dtoUsuario = daoUsuario.read(dtoUsuario);
+                    
+                    
+                    System.out.println(dtoUsuario);
+                    
+                    HttpSession sesion = request.getSession();
+
+                    sesion.setAttribute("correo", correoUsuario);
+                    sesion.setAttribute("dtoUsuario", dtoUsuario);
+
+                    response.sendRedirect("./usr/inicio");
+                } else {
+                    response.sendRedirect("iniciarSesion.jsp?msg=o");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ProcesarInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
             response.sendRedirect("iniciarSesion.jsp?msg=a");
         }
 

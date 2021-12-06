@@ -245,23 +245,23 @@ insert into Vacunas values (7, "Spikevax (Moderna)", "Es producida por la farmac
 /*Procedimiento (Procedure) para el INICIO DE SESION*/
 drop procedure if exists spIniciarSesion;
 delimiter |
-create procedure spIniciarSesion(in usr varchar(50), contra varchar(10))
+create procedure spIniciarSesion(in usr varchar(50), contra nvarchar(50))
 begin
-	declare existe, id int;
-    declare msj varchar(200);
+	declare idUsr, existe int;
+    declare msj nvarchar(200);
     
-    set existe = (select count(*) from Usuario where Correo = usr and Contraseña = contra);
+    set existe = (select count(*) from Usuario where Correo = usr and Contrasena = contra);
     if(existe = 1) then
-        set id=(select idUsuario from Usuario where Correo = usr and  Contraseña = contra);
-        select id;
+		select idUsuario into idUsr from Usuario where Correo = usr;
+        set msj = "ok";
     else
-		if(existe=0)then
-     set msj="Correo o contraseña incorrecto";
-      select msj;
-		end if;
-    end if;
+		set msj = "Usuario o contraseña incorrecta";
+	end if;
+    select msj, idUsr;
 end; |
 delimiter ;
+
+call spIniciarSesion("bolanos.c@hotmail.com", "adoo124");
 
 show tables from vacunadoo;
 select * from Vacunas;
