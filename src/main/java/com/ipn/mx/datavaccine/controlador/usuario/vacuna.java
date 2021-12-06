@@ -5,8 +5,13 @@
  */
 package com.ipn.mx.datavaccine.controlador.usuario;
 
+import com.ipn.mx.datavaccine.dao.Vacunadao;
+import com.ipn.mx.datavaccine.dto.VacunaDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,17 +44,32 @@ public class vacuna extends HttpServlet {
             response.sendRedirect("../../iniciarSesion.jsp");
             return;
         }
-        
-        String vacuna = new String(request.getParameter("x").getBytes(), "UTF-8");
-        
 
-        
-        //hacer switch de vacuna y en funcion a las vacunas que existan dentro de la base de datos obtener su info
-        
-        request.setAttribute("nombreVacuna", vacuna);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("vacunax.jsp");
-        rd.forward(request, response);
+        try {
+            String vacuna = new String(request.getParameter("x").getBytes(), "UTF-8");
+
+            if (vacuna.equals("")) {
+                response.sendRedirect("../listaVacunas");
+            }
+
+            Vacunadao daoVacuna = new Vacunadao();
+            VacunaDTO dtoVacuna = new VacunaDTO();
+
+            dtoVacuna.getEntidadVacuna().setIdVacuna(Integer.parseInt(vacuna));
+
+            dtoVacuna = daoVacuna.read(dtoVacuna);
+
+            //hacer switch de vacuna y en funcion a las vacunas que existan dentro de la base de datos obtener su info
+            request.setAttribute("nombreVacuna", dtoVacuna.getEntidadVacuna().getNombreVacuna());
+            request.setAttribute("datosVacuna", dtoVacuna);
+
+            RequestDispatcher rd = request.getRequestDispatcher("vacunax.jsp");
+            rd.forward(request, response);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(vacuna.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

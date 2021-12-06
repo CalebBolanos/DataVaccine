@@ -3,6 +3,7 @@
     Created on : 25 nov. 2021, 12:32:32
     Author     : caleb
 --%>
+<%@page import="com.ipn.mx.datavaccine.dto.VacunaDTO"%>
 <%@page import="com.ipn.mx.datavaccine.dto.UsuarioDTO"%>
 <%
     HttpSession sesionUsuario = request.getSession();
@@ -15,6 +16,7 @@
     int link = request.getParameter("link") == null ? 0 : Integer.parseInt(request.getParameter("link"));
     System.out.println("link:"+ link);
     UsuarioDTO dtoUsuario = (UsuarioDTO) sesionUsuario.getAttribute("dtoUsuario");
+    VacunaDTO dtoVacuna = (VacunaDTO)request.getAttribute("datosVacuna");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -146,13 +148,13 @@
                                                     <v-card-title class="text-no-wrap pt-1 ps-2">
                                                         {{nombreVacuna}}
                                                     </v-card-title>
-                                                    <v-card-subtitle class="text-no-wrap ps-2">
+                                                    <v-card-subtitle class=" ps-2">
                                                         {{resumenVacuna}}
                                                     </v-card-subtitle>
                                                 </v-col>
                                                 <v-col cols="4">
                                                     <!--<v-img contain height="180" width="159" :src="require(`@/assets/images/misc/triangle-${$vuetify.theme.dark ? 'dark':'light'}.png`)" class="greeting-card-bg"></v-img>-->
-                                                    <v-img contain height="90" class="greeting-card-trophy" src="https://www.covidvaccinestudy.com/sites/all/themes/gvs/images/pfizer_logo_2.png"></v-img>
+                                                    <v-img contain height="90" class="greeting-card-trophy" :src="linkImagenLogo"></v-img>
                                                 </v-col>
                                             </v-row>
                                         </v-card>
@@ -342,12 +344,12 @@ new Vue({
 
             //informacion general
             nombreVacuna: '<%=vacuna%>',
-            resumenVacuna: 'resumen',
-            infoEficacia: 'eficacia',
-            infoEfectosSecundarios: 'efectos',
-            infoSeguridad: 'seguridad',
-            linkImagenPortada: 'https://www.capital21.cdmx.gob.mx/noticias/wp-content/uploads/2020/12/vacuna_covid_Pfizer_01.jpg',
-            linkImagenLogo: 'https://www.covidvaccinestudy.com/sites/all/themes/gvs/images/pfizer_logo_2.png',
+            resumenVacuna: `<%=dtoVacuna.getEntidadVacuna().getDescripcion()%>`,
+            infoEficacia: `<%=dtoVacuna.getEntidadVacuna().getEficacia()%>`,
+            infoEfectosSecundarios: 'faltan',
+            infoSeguridad: `<%=dtoVacuna.getEntidadVacuna().getSeguridad()%>`,
+            linkImagenPortada: `<%=dtoVacuna.getEntidadVacuna().getPortada()%>`,
+            linkImagenLogo: `<%=dtoVacuna.getEntidadVacuna().getLogo()%>`,
             panel: [0, 1, 2],
 
             //calcular probabilidad
@@ -357,7 +359,7 @@ new Vue({
 
             //noticias
             newsApiUrl: '',
-            nombreVacunaBusqueda: 'pfizer', //url encoded
+            nombreVacunaBusqueda: '<%=vacuna%>', //url encoded
             totalResultados: 0,
             articulos: [],
 

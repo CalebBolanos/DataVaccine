@@ -4,6 +4,9 @@
     Author     : caleb
 --%> 
 
+<%@page import="com.ipn.mx.datavaccine.dto.VacunaDTO"%>
+<%@page import="com.ipn.mx.datavaccine.dao.Vacunadao"%>
+<%@page import="java.util.List"%>
 <%@page import="com.ipn.mx.datavaccine.dto.UsuarioDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -14,6 +17,8 @@
     }
     String correo = (String) sesionUsuario.getAttribute("correo");
     UsuarioDTO dtoUsuario = (UsuarioDTO) sesionUsuario.getAttribute("dtoUsuario");
+    List listaVacuna = (List) request.getAttribute("listaVacuna");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -122,38 +127,40 @@
                             <v-col cols="12">
                                 <v-text-field label="Buscar vacuna" outlined clearable dense></v-text-field>
                             </v-col>
-                            <template v-for="n in 14">
-                                <v-col cols="4" :key="n">
-                                    <v-card class="greeting-card">
-                                        <v-row class="ma-0 pa-0">
-                                            <v-col cols="8">
-                                                <v-card-title class="text-no-wrap pt-1 ps-2">
-                                                    Vacuna {{n}}
-                                                </v-card-title>
-                                                <v-card-subtitle class="text-no-wrap ps-2">
-                                                    Descripción
-                                                </v-card-subtitle>
-                                                <v-card-text class="d-flex align-center mt-2 pb-2 ps-2">
-                                                    <div>
-                                                        <p class="text-xl font-weight-semibold primary--text mb-2">
-                                                            10 comentarios
-                                                        </p>
+                            <%
+                                VacunaDTO vacunax;
+                                for(int i=0; i<listaVacuna.size(); i++){
+                                    vacunax = (VacunaDTO)listaVacuna.get(i);
+                                    
+                            %>
+                            <v-col cols="4" :key="n">
+                                <v-card class="greeting-card">
+                                    <v-row class="ma-0 pa-0">
+                                        <v-col cols="8">
+                                            <v-card-title class="text-no-wrap pt-1 ps-2">
+                                                <%=vacunax.getEntidadVacuna().getNombreVacuna()%>
+                                            </v-card-title>
+                                            <v-card-subtitle style="white-space:nowrap; word-break: normal; overflow: hidden; text-overflow: ellipsis;">
+                                                <%=vacunax.getEntidadVacuna().getDescripcion()%>
+                                            </v-card-subtitle>
+                                            <v-card-text class="d-flex align-center mt-2 pb-2 ps-2">
+                                                <div>
+                                                    <v-btn small color="primary" href="vacuna?x=<%=vacunax.getEntidadVacuna().getIdVacuna()%>">
+                                                        Ver más
+                                                    </v-btn>
+                                                </div>
+                                            </v-card-text>
+                                        </v-col>
 
-                                                        <v-btn small color="primary" href="vacuna?x=Pfizer">
-                                                            Ver más
-                                                        </v-btn>
-                                                    </div>
-                                                </v-card-text>
-                                            </v-col>
-
-                                            <v-col cols="4">
-                                                <!--<v-img contain height="180" width="159" :src="require(`@/assets/images/misc/triangle-${$vuetify.theme.dark ? 'dark':'light'}.png`)" class="greeting-card-bg"></v-img>-->
-                                                <v-img contain height="108" max-width="83" class="greeting-card-trophy" src="../../img/logo.png"></v-img>
-                                            </v-col>
-                                        </v-row>
-                                    </v-card>
-                                </v-col>
-                            </template>
+                                        <v-col cols="4">
+                                            <v-img contain height="108" max-width="83" class="greeting-card-trophy" src="<%=vacunax.getEntidadVacuna().getLogo()%>"></v-img>
+                                        </v-col>
+                                    </v-row>
+                                </v-card>
+                            </v-col>
+                            <%
+                                }
+                            %>
                         </v-row>
                     </v-container>
                 </v-main>
@@ -167,7 +174,7 @@ new Vue({
             drawer: false,
             group: 1,
 
-            nombreUsuario: '<%=dtoUsuario.getEntidad().getNombreUsuario()+ " " + dtoUsuario.getEntidad().getPaterno()%>',
+            nombreUsuario: '<%=dtoUsuario.getEntidad().getNombreUsuario() + " " + dtoUsuario.getEntidad().getPaterno()%>',
             correo: '<%=correo%>',
             imagenUsuario: 'https://themeselection.com/demo/materio-vuetify-vuejs-admin-template-free/demo/img/1.e2938115.png',
         }),
