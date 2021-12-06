@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.ipn.mx.datavaccine.vacunadao;
+package com.ipn.mx.datavaccine.dao;
 
-import com.ipn.mx.datavaccine.vacunadto.Vacunadto;
+import com.ipn.mx.datavaccine.dto.VacunaDTO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -47,7 +47,7 @@ public class Vacunadao {
         }
     }
     
-    public void create(Vacunadto dto) throws SQLException {
+    public void create(VacunaDTO dto) throws SQLException {
         conectar();
         PreparedStatement ps = null;
         try {
@@ -70,7 +70,7 @@ public class Vacunadao {
         }
     }
     
-    public void update(Vacunadto dto) throws SQLException {
+    public void update(VacunaDTO dto) throws SQLException {
         conectar();
         PreparedStatement ps = null;
         try {
@@ -93,7 +93,7 @@ public class Vacunadao {
         }
     }
     
-    public void delete(Vacunadto dto) throws SQLException {
+    public void delete(VacunaDTO dto) throws SQLException {
         conectar();
         PreparedStatement ps = null;
         try {
@@ -110,7 +110,7 @@ public class Vacunadao {
         }
     }
     
-    public Vacunadto read(Vacunadto dto) throws SQLException {
+    public VacunaDTO read(VacunaDTO dto) throws SQLException {
         conectar();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -120,7 +120,7 @@ public class Vacunadao {
             rs = ps.executeQuery();
             List resultados = obtenerResultados(rs);
             if (resultados.size() > 0) {
-                return (Vacunadto) resultados.get(0);
+                return (VacunaDTO) resultados.get(0);
             } else {
                 return null;
             }
@@ -140,7 +140,7 @@ public class Vacunadao {
     private List obtenerResultados(ResultSet rs) throws SQLException {
         List resultados = new ArrayList();
         while (rs.next()) {
-            Vacunadto dto = new Vacunadto();
+            VacunaDTO dto = new VacunaDTO();
             dto.getEntidadVacuna().setIdVacuna(rs.getInt("idVacuna"));
             dto.getEntidadVacuna().setNombreVacuna(rs.getString("nombreVacuna"));
             dto.getEntidadVacuna().setDescripcion(rs.getString("Descripcion"));
@@ -183,7 +183,7 @@ public class Vacunadao {
     public static void main(String[] args) {
         Vacunadao dao = new Vacunadao();
         
-        Vacunadto dto = new Vacunadto();
+        VacunaDTO dto = new VacunaDTO();
 //        dto.getEntidadVacuna().setNombreVacuna("Pfizeraaa21");
 //        dto.getEntidadVacuna().setDescripcion("Prueba21");
 //        dto.getEntidadVacuna().setLogo("Sin logo21");

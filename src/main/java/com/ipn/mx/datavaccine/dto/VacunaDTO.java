@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.ipn.mx.datavaccine.vacunadto;
+package com.ipn.mx.datavaccine.dto;
 
 import com.ipn.mx.datavaccine.entidades.Vacuna;
 import java.io.Serializable;
