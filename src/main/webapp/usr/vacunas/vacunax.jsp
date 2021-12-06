@@ -3,6 +3,7 @@
     Created on : 25 nov. 2021, 12:32:32
     Author     : caleb
 --%>
+<%@page import="com.ipn.mx.datavaccine.dto.UsuarioDTO"%>
 <%
     HttpSession sesionUsuario = request.getSession();
     if (sesionUsuario.getAttribute("correo") == null) {
@@ -13,6 +14,7 @@
     String vacuna = (String)request.getAttribute("nombreVacuna");
     int link = request.getParameter("link") == null ? 0 : Integer.parseInt(request.getParameter("link"));
     System.out.println("link:"+ link);
+    UsuarioDTO dtoUsuario = (UsuarioDTO) sesionUsuario.getAttribute("dtoUsuario");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -334,7 +336,7 @@ new Vue({
                 'Noticias',
             ],
             
-            nombreUsuario: 'Nombre de usuario',
+            nombreUsuario: '<%=dtoUsuario.getEntidad().getNombreUsuario()+ " " + dtoUsuario.getEntidad().getPaterno()%>',
             correo: '<%=correo%>',
             imagenUsuario: 'https://themeselection.com/demo/materio-vuetify-vuejs-admin-template-free/demo/img/1.e2938115.png',
 

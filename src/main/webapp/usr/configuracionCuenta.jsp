@@ -312,7 +312,7 @@ new Vue({
     data: () => ({
             drawer: false,
             group: 2,
-            nombreUsuario: '<%=dtoUsuario.getEntidad().getNombreUsuario()%>',
+            nombreUsuario: '<%=dtoUsuario.getEntidad().getNombreUsuario()+ " " + dtoUsuario.getEntidad().getPaterno()%>',
             correo: '<%=correo%>',
             imagenUsuario: 'https://themeselection.com/demo/materio-vuetify-vuejs-admin-template-free/demo/img/1.e2938115.png',
 
@@ -359,10 +359,10 @@ new Vue({
             ],
             alergias: [<%=dtoUsuario.getEntidad().getAlergias()%>],
             itemsAlergias: [
-                'Programming',
-                'Design',
-                'Vue',
-                'Vuetify',
+                'Alergia 1',
+                'Alergia 2',
+                'Alergia 3',
+                'Alergia 4',
             ],
 
             status: ['Active', 'Inactive', 'Pending', 'Closed'],

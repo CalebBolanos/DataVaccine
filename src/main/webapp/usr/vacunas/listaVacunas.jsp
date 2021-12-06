@@ -4,6 +4,7 @@
     Author     : caleb
 --%> 
 
+<%@page import="com.ipn.mx.datavaccine.dto.UsuarioDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     HttpSession sesionUsuario = request.getSession();
@@ -12,6 +13,7 @@
         return;
     }
     String correo = (String) sesionUsuario.getAttribute("correo");
+    UsuarioDTO dtoUsuario = (UsuarioDTO) sesionUsuario.getAttribute("dtoUsuario");
 %>
 <!DOCTYPE html>
 <html>
@@ -165,7 +167,7 @@ new Vue({
             drawer: false,
             group: 1,
 
-            nombreUsuario: 'Nombre de usuario',
+            nombreUsuario: '<%=dtoUsuario.getEntidad().getNombreUsuario()+ " " + dtoUsuario.getEntidad().getPaterno()%>',
             correo: '<%=correo%>',
             imagenUsuario: 'https://themeselection.com/demo/materio-vuetify-vuejs-admin-template-free/demo/img/1.e2938115.png',
         }),
