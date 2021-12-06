@@ -22,9 +22,8 @@ CREATE TABLE Vacunas
   Descripcion varchar(1000) NOT NULL,
   Logo varchar(1000) NOT NULL,
   Portada varchar(1000) NOT NULL,
-  Eficacia nvarchar(1000) NOT NULL,
+  Eficacia nvarchar(1500) NOT NULL,
   Seguridad varchar(1000) NOT NULL,
-  idForo INT NOT NULL,
   PRIMARY KEY (idVacuna)
 );
 
@@ -51,6 +50,7 @@ CREATE TABLE Foros
 (
   idForo INT AUTO_INCREMENT,
   Nombre varchar(30) NOT NULL,
+  idVacuna INT NOT NULL,
   PRIMARY KEY (idForo),
   FOREIGN KEY (idVacuna) REFERENCES Vacunas(idVacuna)
 );
