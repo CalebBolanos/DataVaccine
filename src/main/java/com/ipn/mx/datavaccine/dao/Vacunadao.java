@@ -36,7 +36,7 @@ public class Vacunadao {
     
     private void conectar() {
         usrBD = "root";
-        passBD = "12345678";
+        passBD = "n0m3l0s3";
         urlBD = "jdbc:mysql://localhost:3306/vacunadoo?serverTimezone=UTC";
         driverClassName = "com.mysql.cj.jdbc.Driver";
         try {
