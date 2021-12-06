@@ -1,3 +1,5 @@
+show databases;
+
 SET sql_mode=(SELECT REPLACE(@@sql_mode,"ONLY_FULL_GROUP_BY","")); -- Comando usado para poder modificar tablar
 drop database if exists vacunadoo;				   -- Comando para borrar una base de datos en caso de exist
 create database vacunadoo;					   -- Comando para crear una base de datos
@@ -14,14 +16,13 @@ CREATE TABLE Usuario
   Edad INT NOT NULL,
   Genero varchar(20) NOT NULL,
   Folio varchar(50) NULL,
-  Foto varchar(500) NOT NULL,
+  Foto varchar(500) NULL,
   Correo varchar(50) NOT NULL,
   Contrasena varchar(10) NOT NULL,
   Altura float NOT NULL,
   Peso float NOT NULL,
   Alergias varchar(50) NULL,
   GrupoSanguineo varchar(10) NOT NULL,
-  idDatos INT NOT NULL,
   PRIMARY KEY (idUsuario),
   UNIQUE (Folio)
 );
@@ -243,3 +244,5 @@ insert into Vacunas values (7, "Spikevax (Moderna)", "Es producida por la farmac
 
 show tables from vacunadoo;
 select * from Vacunas;
+
+select * from Usuario;

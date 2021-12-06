@@ -5,8 +5,13 @@
  */
 package com.ipn.mx.datavaccine.controlador;
 
+import com.ipn.mx.datavaccine.dao.UsuarioDAO;
+import com.ipn.mx.datavaccine.dto.UsuarioDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,6 +59,35 @@ public class ProcesarRegistro extends HttpServlet {
             out.println(request.getParameter("peso"));
             out.println(request.getParameter("grupoSanguineo"));
             out.println(request.getParameter("alergias"));
+            
+            UsuarioDAO daoUsuario = new UsuarioDAO();
+            UsuarioDTO dtoUsuario = new UsuarioDTO();
+            
+            dtoUsuario.getEntidad().setNombreUsuario(request.getParameter("nombre"));
+            dtoUsuario.getEntidad().setPaterno(request.getParameter("paterno"));
+            dtoUsuario.getEntidad().setMaterno(request.getParameter("materno"));
+            dtoUsuario.getEntidad().setGenero(request.getParameter("genero"));
+            dtoUsuario.getEntidad().setEdad(Integer.parseInt(request.getParameter("edad")));
+            dtoUsuario.getEntidad().setCorreo(request.getParameter("correo"));
+            dtoUsuario.getEntidad().setContrasena(request.getParameter("contrasena"));
+            dtoUsuario.getEntidad().setFolio(request.getParameter("folio"));
+            dtoUsuario.getEntidad().setAltura(Float.parseFloat(request.getParameter("altura")));
+            dtoUsuario.getEntidad().setPeso(Float.parseFloat(request.getParameter("peso")));
+            dtoUsuario.getEntidad().setAlergias(request.getParameter("grupoSanguineo"));
+            dtoUsuario.getEntidad().setGrupoSanguineo(request.getParameter("alergias"));
+            
+            System.out.println(dtoUsuario.getEntidad().toString());
+            
+            try {
+                daoUsuario.create(dtoUsuario);
+                //request.setAttribute("msj", "Cuenta registrada con exito, ahora puedes iniciar sesion");
+                response.sendRedirect("iniciarSesion.jsp");
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(ProcesarRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            
 
             out.println("</body>");
             out.println("</html>");

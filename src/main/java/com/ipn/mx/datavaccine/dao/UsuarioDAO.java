@@ -21,24 +21,26 @@ import java.util.logging.Logger;
  * @author Lalo
  */
 public class UsuarioDAO {
-    private static final String SQL_INSERT = "insert into Usuario (Nombre,ApellidoP,ApellidoM,Genero,Edad,Correo,Contraseña,Folio,Foto,Altura,Peso,Alergias,GrupoSanguineo,idDatos) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "update Producto set  Nombre = ?, ApellidoP = ?, ApellidoM =?, Genero=?, Edad=?, Correo=?, Contraseña=?, Folio=?, Foto=?, Altura=?, Peso=?, Alergias=?, GrupoSanguineo=? where idUsuario = ?";
+    private static final String SQL_INSERT = "insert into Usuario (Nombre,ApellidoP,ApellidoM,Genero,Edad,Correo,Contrasena,Folio,Foto,Altura,Peso,Alergias,GrupoSanguineo) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "update Usuario set  Nombre = ?, ApellidoP = ?, ApellidoM =?, Genero=?, Edad=?, Correo=?, Contraseña=?, Folio=?, Foto=?, Altura=?, Peso=?, Alergias=?, GrupoSanguineo=? where idUsuario = ?";
     private static final String SQL_DELETE = "delete from Usuario where idUsuario = ?";
-    private static final String SQL_READ = "select idUsuario,Nombre,ApellidoP,ApellidoM,Genero,Edad,Correo,Contraseña,Folio,Foto,Altura,Peso,Alergias,GrupoSanguineo,idDatos from Usuario where idUsuario = ?";
-    private static final String SQL_ALL = "select idUsuario,Nombre,ApellidoP,ApellidoM,Genero,Edad,Correo,Contraseña,Folio,Foto,Altura,Peso,Alergias,GrupoSanguineo,idDatos from Usuario";
+    private static final String SQL_READ = "select idUsuario,Nombre,ApellidoP,ApellidoM,Genero,Edad,Correo,Contrasena,Folio,Foto,Altura,Peso,Alergias,GrupoSanguineo from Usuario where idUsuario = ?";
+    private static final String SQL_ALL = "select idUsuario,Nombre,ApellidoP,ApellidoM,Genero,Edad,Correo,Contrasena,Folio,Foto,Altura,Peso,Alergias,GrupoSanguineo from Usuario";
 
     private Connection conexion;
 //base local
-    private void conectar() {
+    private Connection conectar() {
        String user = "root";
-       String pwd = "Tostadita de tinga4";
-       String url = "jdbc:mysql://localhost:3306/ProyectoADOO?serverTimezone=UTC";
+       String pwd = "n0m3l0s3";
+       String url = "jdbc:mysql://localhost:3306/vacunadoo?serverTimezone=UTC";
        String driverClassName = "com.mysql.cj.jdbc.Driver";
         try {
             Class.forName(driverClassName);
+            conexion = DriverManager.getConnection(url, user, pwd);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return conexion;
     }
 
     public void create(UsuarioDTO dto) throws SQLException {
@@ -59,7 +61,6 @@ public class UsuarioDAO {
             ps.setFloat(11, dto.getEntidad().getPeso());
             ps.setString(12, dto.getEntidad().getAlergias());
             ps.setString(13, dto.getEntidad().getGrupoSanguineo());
-            ps.setInt(14, dto.getEntidad().getClaveDatosMedicos());
             
             
             
@@ -198,7 +199,6 @@ public class UsuarioDAO {
             p.getEntidad().setPeso(rs.getFloat("Peso"));
             p.getEntidad().setAlergias(rs.getString("Alergias"));
             p.getEntidad().setGrupoSanguineo(rs.getString("Grupo Sanguineo"));
-            p.getEntidad().setClaveDatosMedicos(rs.getInt("ClaveDatosMedicos"));
             
             
             
