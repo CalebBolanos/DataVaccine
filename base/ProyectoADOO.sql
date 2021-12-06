@@ -241,6 +241,27 @@ insert into Vacunas values (7, "Spikevax (Moderna)", "Es producida por la farmac
     a la Comision de Autorizacion Sanitaria, donde dictaminadores especializados realizaron una revision 
     de los expedientes, certificando que el biologico cumple los requisitos de calidad, seguridad y eficacia 
     necesarios para ser aplicado.");
+    
+/*Procedimiento (Procedure) para el INICIO DE SESION*/
+drop procedure if exists spIniciarSesion;
+delimiter |
+create procedure spIniciarSesion(in usr varchar(50), contra varchar(10))
+begin
+	declare existe, id int;
+    declare msj varchar(200);
+    
+    set existe = (select count(*) from Usuario where Correo = usr and Contraseña = contra);
+    if(existe = 1) then
+        set id=(select idUsuario from Usuario where Correo = usr and  Contraseña = contra);
+        select id;
+    else
+		if(existe=0)then
+     set msj="Correo o contraseña incorrecto";
+      select msj;
+		end if;
+    end if;
+end; |
+delimiter ;
 
 show tables from vacunadoo;
 select * from Vacunas;
