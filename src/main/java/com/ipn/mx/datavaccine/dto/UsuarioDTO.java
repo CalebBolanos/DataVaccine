@@ -38,7 +38,6 @@ public class UsuarioDTO implements Serializable{
         sb.append("Peso: ").append(getEntidad().getPeso()).append("\n");
         sb.append("Alergias: ").append(getEntidad().getAlergias()).append("\n");
         sb.append("Grupo Sanguineo: ").append(getEntidad().getGrupoSanguineo()).append("\n");
-        sb.append("Clave datos medicos: ").append(getEntidad().getClaveDatosMedicos()).append("\n");
         return sb.toString();
     }
 }

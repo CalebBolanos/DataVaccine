@@ -5,14 +5,25 @@ create database vacunadoo;					   -- Comando para crear una base de datos
 use vacunadoo;
 
 /*===============================================Tablas===========================================================================*/
-CREATE TABLE DatosMedicos
+CREATE TABLE Usuario
 (
-  idDatos INT AUTO_INCREMENT,
+  idUsuario INT AUTO_INCREMENT,
+  Nombre varchar(50) NOT NULL,
+  ApellidoP varchar(50) NOT NULL,
+  ApellidoM varchar(50) NOT NULL,
+  Edad INT NOT NULL,
+  Genero varchar(20) NOT NULL,
+  Folio varchar(50) NULL,
+  Foto varchar(500) NOT NULL,
+  Correo varchar(50) NOT NULL,
+  Contrasena varchar(10) NOT NULL,
   Altura float NOT NULL,
   Peso float NOT NULL,
   Alergias varchar(50) NULL,
-  TipoSangre varchar(10) NOT NULL,
-  PRIMARY KEY (idDatos)
+  GrupoSanguineo varchar(10) NOT NULL,
+  idDatos INT NOT NULL,
+  PRIMARY KEY (idUsuario),
+  UNIQUE (Folio)
 );
 
 CREATE TABLE Vacunas
@@ -73,30 +84,12 @@ CREATE TABLE cubren
   FOREIGN KEY (idMensaje) REFERENCES Mensajes(idMensaje)
 );
 
-CREATE TABLE Usario
-(
-  idUsuario INT AUTO_INCREMENT,
-  Nombre varchar(50) NOT NULL,
-  ApellidoP varchar(50) NOT NULL,
-  ApellidoM varchar(50) NOT NULL,
-  Edad INT NOT NULL,
-  Genero varchar(20) NOT NULL,
-  Folio varchar(50) NULL,
-  Foto varchar(500) NOT NULL,
-  Correo varchar(50) NOT NULL,
-  Contrasena varchar(10) NOT NULL,
-  idDatos INT NOT NULL,
-  PRIMARY KEY (idUsuario),
-  FOREIGN KEY (idDatos) REFERENCES DatosMedicos(idDatos),
-  UNIQUE (Folio)
-);
-
 CREATE TABLE Consulta
 (
   idUsuario INT NOT NULL,
   idVacuna INT NOT NULL,
   PRIMARY KEY (idUsuario, idVacuna),
-  FOREIGN KEY (idUsuario) REFERENCES Usario(idUsuario),
+  FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
   FOREIGN KEY (idVacuna) REFERENCES Vacunas(idVacuna)
 );
 

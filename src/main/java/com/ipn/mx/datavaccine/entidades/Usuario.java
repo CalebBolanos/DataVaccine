@@ -30,5 +30,4 @@ public class Usuario implements Serializable{
     private float peso;
     private String alergias;
     private String grupoSanguineo;
-    private int claveDatosMedicos;
 }
