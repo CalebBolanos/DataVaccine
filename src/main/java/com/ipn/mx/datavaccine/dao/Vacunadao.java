@@ -26,17 +26,17 @@ public class Vacunadao {
     private String urlBD;
     private String driverClassName;
     
-    private static final String SQL_INSERT = "insert into Vacunas (nombreVacuna,Descripcion,Logo,Portada,Eficacia,Seguridad,idForo) values (?,?,?,?,?,?,?)";
+    private static final String SQL_INSERT = "insert into Vacunas (nombreVacuna,Descripcion,Logo,Portada,Eficacia,Seguridad) values (?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "update Vacunas set nombreVacuna = ?, Descripcion = ?, Logo = ?, Portada = ?, Eficacia = ?, Seguridad = ? where idVacuna = ?";
     private static final String SQL_DELETE = "delete from Vacunas where idVacuna = ?";
-    private static final String SQL_READ = "select idVacuna, nombreVacuna, Descripcion, Logo, Portada, Eficacia, Seguridad, idForo from Vacunas where idVacuna = ?";
-    private static final String SQL_READALL = "select idVacuna, nombreVacuna, Descripcion, Logo, Portada, Eficacia, Seguridad, idForo from Vacunas";
+    private static final String SQL_READ = "select idVacuna, nombreVacuna, Descripcion, Logo, Portada, Eficacia, Seguridad from Vacunas where idVacuna = ?";
+    private static final String SQL_READALL = "select idVacuna, nombreVacuna, Descripcion, Logo, Portada, Eficacia, Seguridad from Vacunas";
     
     private Connection conexion;
     
     private void conectar() {
         usrBD = "root";
-        passBD = "n0m3l0s3";
+        passBD = "12345678";
         urlBD = "jdbc:mysql://localhost:3306/vacunadoo?serverTimezone=UTC";
         driverClassName = "com.mysql.cj.jdbc.Driver";
         try {
@@ -58,7 +58,6 @@ public class Vacunadao {
             ps.setString(4, dto.getEntidadVacuna().getPortada());
             ps.setString(5, dto.getEntidadVacuna().getEficacia());
             ps.setString(6, dto.getEntidadVacuna().getSeguridad());
-            ps.setInt(7, dto.getEntidadVacuna().getIdForo());
             ps.executeLargeUpdate();
         } finally {
             if (ps != null) {
@@ -148,7 +147,6 @@ public class Vacunadao {
             dto.getEntidadVacuna().setPortada(rs.getString("Portada"));
             dto.getEntidadVacuna().setEficacia(rs.getString("Eficacia"));
             dto.getEntidadVacuna().setSeguridad(rs.getString("Seguridad"));
-            dto.getEntidadVacuna().setIdForo(rs.getInt("idForo"));
             resultados.add(dto);
         }
         return resultados;
@@ -184,21 +182,20 @@ public class Vacunadao {
         Vacunadao dao = new Vacunadao();
         
         VacunaDTO dto = new VacunaDTO();
-//        dto.getEntidadVacuna().setNombreVacuna("Pfizeraaa21");
-//        dto.getEntidadVacuna().setDescripcion("Prueba21");
-//        dto.getEntidadVacuna().setLogo("Sin logo21");
-//        dto.getEntidadVacuna().setPortada("Sin portada21");
-//        dto.getEntidadVacuna().setEficacia("Sin eficiencia21");
-//        dto.getEntidadVacuna().setSeguridad("Sin seguridad21");
-//        dto.getEntidadVacuna().setIdForo(1);
-
+//        dto.getEntidadVacuna().setNombreVacuna("prueba nueva base");
+//        dto.getEntidadVacuna().setDescripcion("prueba nueva base");
+//        dto.getEntidadVacuna().setLogo("Sin logoprueba nueva base");
+//        dto.getEntidadVacuna().setPortada("Sin portadaprueba nueva base");
+//        dto.getEntidadVacuna().setEficacia("Sin eficienciaprueba nueva base");
+//        dto.getEntidadVacuna().setSeguridad("Sin seguridadprueba nueva base");
+//        dto.getEntidadVacuna().setIdVacuna(8);
         try {
-            dto.getEntidadVacuna().setIdVacuna(1);
-//            dto = dao.read(dto);
+            dto.getEntidadVacuna().setIdVacuna(8);
+            dto = dao.read(dto);
 //            System.out.println(dto);
             dao.delete(dto);
-            System.out.println(dao.readall());
-            
+//            System.out.println(dao.readall());
+//            dao.update(dto);
         } catch (SQLException ex) {
             Logger.getLogger(Vacunadao.class.getName()).log(Level.SEVERE, null, ex);
         }

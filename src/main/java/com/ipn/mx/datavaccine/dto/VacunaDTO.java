@@ -37,7 +37,6 @@ public class VacunaDTO implements Serializable {
         sb.append("Portada= ").append(getEntidadVacuna().getPortada()).append("\n");
         sb.append("Eficacia= ").append(getEntidadVacuna().getEficacia()).append("\n");
         sb.append("Seguridad= ").append(getEntidadVacuna().getSeguridad()).append("\n");
-        sb.append("idForo= ").append(getEntidadVacuna().getIdForo()).append("\n");
         return sb.toString();
     }
 

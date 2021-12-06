@@ -22,5 +22,4 @@ public class Vacuna implements Serializable{
     private String Portada;
     private String Eficacia;
     private String Seguridad;
-    private int idForo;
 }
