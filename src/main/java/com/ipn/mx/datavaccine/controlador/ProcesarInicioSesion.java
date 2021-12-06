@@ -68,7 +68,8 @@ public class ProcesarInicioSesion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
+        request.setCharacterEncoding("UTF-8");
+        
         if (!request.getParameter("usuario").equals("") && !request.getParameter("contrasena").equals("")) {
             String correoUsuario = new String(request.getParameter("usuario").getBytes(), "UTF-8");
             String contrasena = new String(request.getParameter("contrasena").getBytes(), "UTF-8");

@@ -36,64 +36,7 @@ public class ProcesarRegistro extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ProcearRegistro</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ProcearRegistro at " + request.getContextPath() + "</h1>");
-            out.println(request.getParameter("correo"));
-            out.println(request.getParameter("contrasena"));
-            out.println(request.getParameter("contrasena2"));
-            out.println(request.getParameter("nombre"));
-            out.println(request.getParameter("paterno"));
-            out.println(request.getParameter("materno"));
-            out.println(request.getParameter("edad"));
-            out.println(request.getParameter("genero"));
-            out.println(request.getParameter("folio"));
-            out.println(request.getParameter("altura"));
-            out.println(request.getParameter("peso"));
-            out.println(request.getParameter("grupoSanguineo"));
-            out.println(request.getParameter("alergias"));
-            
-            UsuarioDAO daoUsuario = new UsuarioDAO();
-            UsuarioDTO dtoUsuario = new UsuarioDTO();
-            
-            dtoUsuario.getEntidad().setNombreUsuario(request.getParameter("nombre"));
-            dtoUsuario.getEntidad().setPaterno(request.getParameter("paterno"));
-            dtoUsuario.getEntidad().setMaterno(request.getParameter("materno"));
-            dtoUsuario.getEntidad().setGenero(request.getParameter("genero"));
-            dtoUsuario.getEntidad().setEdad(Integer.parseInt(request.getParameter("edad")));
-            dtoUsuario.getEntidad().setCorreo(request.getParameter("correo"));
-            dtoUsuario.getEntidad().setContrasena(request.getParameter("contrasena"));
-            dtoUsuario.getEntidad().setFolio(request.getParameter("folio").equals("") ? null : request.getParameter("folio"));
-            dtoUsuario.getEntidad().setAltura(Float.parseFloat(request.getParameter("altura")));
-            dtoUsuario.getEntidad().setPeso(Float.parseFloat(request.getParameter("peso")));
-            dtoUsuario.getEntidad().setAlergias(request.getParameter("alergias"));
-            dtoUsuario.getEntidad().setGrupoSanguineo(request.getParameter("grupoSanguineo"));
-            
-            
-            
-            System.out.println(dtoUsuario.getEntidad().toString());
-            
-            try {
-                daoUsuario.create(dtoUsuario);
-                //request.setAttribute("msj", "Cuenta registrada con exito, ahora puedes iniciar sesion");
-                response.sendRedirect("iniciarSesion.jsp");
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(ProcesarRegistro.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            
-
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -124,6 +67,42 @@ public class ProcesarRegistro extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            request.setCharacterEncoding("UTF-8");
+            
+            
+            UsuarioDAO daoUsuario = new UsuarioDAO();
+            UsuarioDTO dtoUsuario = new UsuarioDTO();
+            
+            dtoUsuario.getEntidad().setNombreUsuario(request.getParameter("nombre"));
+            dtoUsuario.getEntidad().setPaterno(request.getParameter("paterno"));
+            dtoUsuario.getEntidad().setMaterno(request.getParameter("materno"));
+            dtoUsuario.getEntidad().setGenero(request.getParameter("genero"));
+            dtoUsuario.getEntidad().setEdad(Integer.parseInt(request.getParameter("edad")));
+            dtoUsuario.getEntidad().setCorreo(request.getParameter("correo"));
+            dtoUsuario.getEntidad().setContrasena(request.getParameter("contrasena"));
+            dtoUsuario.getEntidad().setFolio(request.getParameter("folio").equals("") ? null : request.getParameter("folio"));
+            dtoUsuario.getEntidad().setAltura(Float.parseFloat(request.getParameter("altura")));
+            dtoUsuario.getEntidad().setPeso(Float.parseFloat(request.getParameter("peso")));
+            dtoUsuario.getEntidad().setAlergias(request.getParameter("alergias"));
+            dtoUsuario.getEntidad().setGrupoSanguineo(request.getParameter("grupoSanguineo"));
+            
+            
+            
+            System.out.println(dtoUsuario.getEntidad().toString());
+            
+            try {
+                daoUsuario.create(dtoUsuario);
+                //request.setAttribute("msj", "Cuenta registrada con exito, ahora puedes iniciar sesion");
+                response.sendRedirect("iniciarSesion.jsp");
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(ProcesarRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }
 
     /**
