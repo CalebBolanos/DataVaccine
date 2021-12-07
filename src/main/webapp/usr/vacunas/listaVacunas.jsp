@@ -133,10 +133,10 @@
                                     vacunax = (VacunaDTO)listaVacuna.get(i);
                                     
                             %>
-                            <v-col cols="4" :key="n">
+                            <v-col cols="12" lg="4" md="6" sm="6" :key="n">
                                 <v-card class="greeting-card">
                                     <v-row class="ma-0 pa-0">
-                                        <v-col cols="8">
+                                        <v-col cols="8" >
                                             <v-card-title class="text-no-wrap pt-1 ps-2">
                                                 <%=vacunax.getEntidadVacuna().getNombreVacuna()%>
                                             </v-card-title>

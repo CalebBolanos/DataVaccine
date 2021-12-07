@@ -5,8 +5,13 @@
  */
 package com.ipn.mx.datavaccine.controlador.usuario;
 
+import com.ipn.mx.datavaccine.dao.Vacunadao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,16 +38,26 @@ public class inicio extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        HttpSession sesion = request.getSession();
-        if (sesion.getAttribute("correo") == null) {
-            response.sendRedirect("../iniciarSesion.jsp");
-            return;
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            
+            HttpSession sesion = request.getSession();
+            if (sesion.getAttribute("correo") == null) {
+                response.sendRedirect("../iniciarSesion.jsp");
+                return;
+            }
+            
+            Vacunadao daoVacuna = new Vacunadao();
+            
+            List lista = daoVacuna.readall();
+            
+            request.setAttribute("listaVacuna", lista);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("inicio.jsp");
+            rd.forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        RequestDispatcher rd = request.getRequestDispatcher("inicio.jsp");
-        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
