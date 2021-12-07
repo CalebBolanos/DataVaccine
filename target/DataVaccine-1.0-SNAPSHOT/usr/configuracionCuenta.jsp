@@ -35,6 +35,13 @@
             <v-app>
                 <v-app-bar app dark style=" background-color: rgba(6, 5, 55, 0.85) !important; backdrop-filter: saturate(180%) blur(20px) !important;">
                     <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+                    <v-img
+                        class="mx-2"
+                        src="../img/logo.png"
+                        max-height="40"
+                        max-width="40"
+                        contain
+                        ></v-img>
                     <v-toolbar-title>Configuración de la cuenta</v-toolbar-title>
                     <v-spacer></v-spacer>
 

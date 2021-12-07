@@ -36,7 +36,15 @@
         <div id="app">
             <v-app>
                 <v-app-bar app dark style=" background-color: rgba(6, 5, 55, 0.85) !important; backdrop-filter: saturate(180%) blur(20px) !important;">
+                    
                     <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+                    <v-img
+                        class="mx-2"
+                        src="../img/logo.png"
+                        max-height="40"
+                        max-width="40"
+                        contain
+                        ></v-img>
                     <v-toolbar-title>Inicio</v-toolbar-title>
                     <v-spacer></v-spacer>
 
@@ -160,31 +168,43 @@
                                 <v-sheet min-height="70vh" rounded="lg">
                                     <v-card>
                                         <v-card-title class="align-start">
-                                            <span>Estadisticas de vacunación de esta semana</span>
+                                            <span>Número total de personas que recibieron al menos una dosis de vacuna</span>
 
                                             <v-spacer></v-spacer>
 
                                             <v-btn icon small class="mt-n2 me-n3">
                                                 <v-icon size="22">
-                                                    mdi-clipboard-list
+                                                    mdi-chart-bar
                                                 </v-icon>
                                             </v-btn>
                                         </v-card-title>
 
                                         <v-card-text>
-                                            <!-- Chart -->
-                                            <bar-chart></bar-chart>
+                                            <iframe src="https://ourworldindata.org/grapher/people-vaccinated-covid?country=MEX" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
+                                        </v-card-text>
+                                    </v-card>
+                                </v-sheet>
+                            </v-col>
+                            <v-col cols="12" sm="12">
+                                <v-sheet min-height="70vh" rounded="lg">
+                                    <v-card>
+                                        <v-card-title class="align-start">
+                                            <span>Dosis diarias de vacuna COVID-19 administradas por cada 100 personas</span>
 
-                                            <div class="d-flex align-center">
-                                                <h3 class="text-2xl font-weight-semibold me-4">
-                                                    1000 vacunados
-                                                </h3>
-                                                <span>En lo que va de la semana</span>
-                                            </div>
+                                            <v-spacer></v-spacer>
 
-                                            <v-btn block color="primary" class="mt-6" outlined>
-                                                Detalles
+                                            <v-btn icon small class="mt-n2 me-n3">
+                                                <v-icon size="22">
+                                                    mdi-chart-bar
+                                                </v-icon>
                                             </v-btn>
+                                        </v-card-title>
+                                        <v-card-subtitle>
+                                            Número de dosis diarias administradas (promedio de 7 días), dividido por la población total del país
+                                        </v-card-subtitle>
+
+                                        <v-card-text>
+                                            <iframe src="https://ourworldindata.org/grapher/daily-covid-vaccination-doses-per-capita?country=~MEX" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
                                         </v-card-text>
                                     </v-card>
                                 </v-sheet>
