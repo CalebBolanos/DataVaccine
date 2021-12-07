@@ -280,7 +280,7 @@ begin
 	declare idusr, existe int;
     declare msj nvarchar(200);
 
-	set existe = (select count(*) from Usuario where Nombre = nombreusuario);
+	set existe = 1;
     if(existe = 1) then
 		insert into Publicaciones(Titulo, NombreUsuario, Contenido, Imagen, Fecha, idVacuna) values(title, nombreusuario, mensajito, img, fech, vacun);
 		set msj = "ok";
@@ -290,7 +290,9 @@ begin
     select msj;
 end; |
 delimiter ;
-
-call spGuardarMensaje("prueba", "titulo2", "mensaje2", "imagen", '10-10-20', 1 );
+select * from usuario;
+call spGuardarMensaje("usr", "titulo", "mensaje", "imagen", '10-10-20', 1 );
 select * from Usuario;
 select * from Publicaciones;
+
+select * from Publicaciones where idVacuna = 1 order by Fecha desc;

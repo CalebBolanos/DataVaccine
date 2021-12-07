@@ -2,9 +2,11 @@
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/dao/Vacunadao.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/dao/UsuarioDAO.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/entidades/Vacuna.java
+/Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/controlador/usuario/ProcesarPublicacion.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/controlador/usuario/listaVacunas.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/controlador/usuario/vacuna.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/controlador/ProcesarRegistro.java
+/Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/entidades/Publicacion.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/controlador/usuario/inicio.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/controlador/ProcesarInicioSesion.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/controlador/cerrarSesion.java

@@ -3,6 +3,8 @@
     Created on : 25 nov. 2021, 12:32:32
     Author     : caleb
 --%>
+<%@page import="com.ipn.mx.datavaccine.entidades.Publicacion"%>
+<%@page import="java.util.List"%>
 <%@page import="com.ipn.mx.datavaccine.dto.VacunaDTO"%>
 <%@page import="com.ipn.mx.datavaccine.dto.UsuarioDTO"%>
 <%
@@ -12,11 +14,13 @@
         return;
     }
     String correo = (String) sesionUsuario.getAttribute("correo");
-    String vacuna = (String)request.getAttribute("nombreVacuna");
+    String vacuna = (String) request.getAttribute("nombreVacuna");
     int link = request.getParameter("link") == null ? 0 : Integer.parseInt(request.getParameter("link"));
-    System.out.println("link:"+ link);
+    System.out.println("link:" + link);
     UsuarioDTO dtoUsuario = (UsuarioDTO) sesionUsuario.getAttribute("dtoUsuario");
-    VacunaDTO dtoVacuna = (VacunaDTO)request.getAttribute("datosVacuna");
+    VacunaDTO dtoVacuna = (VacunaDTO) request.getAttribute("datosVacuna");
+
+    List mensajesForo = (List) request.getAttribute("mensajesForo");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -194,13 +198,13 @@
                                                 </v-expansion-panel-header>
                                                 <v-expansion-panel-content>
                                                     Si tienes 18 años o más, ya te puedes vacunar, siguiendo este enlace:
-                                                    <a href="https://mivacuna.salud.gob.mx/index.php">
+                                                    <a href="https://mivacuna.salud.gob.mx/index.php" target="_blank">
                                                         <v-chip class="ma-2" color="primary">
                                                             Registrate en mivacuna.salud.gob.mx
                                                         </v-chip>
                                                     </a>
 
-                                                    <iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q=vacuna&key=AIzaSyAeA4a5P0FRHqnXWzOYZWc7CAZgPkOsnXY"></iframe>
+                                                    <iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q=vacuna+en+ciudad+de+mexico&key=AIzaSyAeA4a5P0FRHqnXWzOYZWc7CAZgPkOsnXY"></iframe>
                                                 </v-expansion-panel-content>
                                             </v-expansion-panel>
                                         </v-expansion-panels>
@@ -238,40 +242,52 @@
                                                 </v-btn>
                                             </v-card-actions>
                                             <v-expand-transition>
-                                                <div v-show="show">
-                                                    <v-divider></v-divider>
 
-                                                    <v-textarea outlined class="mt-4" label="Escribe el mensaje que quieres comentar"></v-textarea>
-                                                    <v-btn block color="primary"> Subir comentario </v-btn>
+                                                <div v-show="show">
+                                                    <form method="POST" action="ProcesarPublicacion">
+                                                        <v-divider></v-divider>
+                                                        <v-text-field v-model="strTitulo" name="titulo" label="Título" type="text" outlined class="mt-4" required :rules="[v => !!v || 'Este campo es requerido']"></v-text-field>
+                                                        <v-textarea v-model="strMensaje" outlined name="mensaje" label="Escribe el mensaje que quieres comentar"></v-textarea>
+                                                        <input id="idVacuna" name="idVacuna" type="hidden" value="<%=dtoVacuna.getEntidadVacuna().getIdVacuna()%>">
+                                                        <v-btn block color="primary" type="submit"> Subir comentario </v-btn>
+                                                    </form>
                                                 </div>
+
                                             </v-expand-transition>
 
                                     </v-col>
-                                    <template v-for="n in 14">
-                                        <v-col cols="12">
+                                    <%
+                                        Publicacion publicacionx;
+                                        for (int i = 0; i < mensajesForo.size(); i++) {
+                                            publicacionx = (Publicacion) mensajesForo.get(i);
 
-                                            <v-card>
-                                                <v-card-title class="">
-                                                    <v-list-item class="grow">
-                                                        <v-list-item-avatar color="primary">
-                                                            <v-img
-                                                                alt=""
-                                                                src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                                                                ></v-img>
-                                                        </v-list-item-avatar>
+                                    %>
+                                    <v-col cols="12">
 
-                                                        <v-list-item-content>
-                                                            <v-list-item-title>Nombre Persona </v-list-item-title>
-                                                            <v-list-item-subtitle>3 de Noviembre de 2021</v-list-item-subtitle>
-                                                        </v-list-item-content>
-                                                    </v-list-item>
-                                                </v-card-title>
-                                                <v-card-text class="pl-8 pr-8">
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur faucibus dolor id feugiat convallis. Curabitur dictum mi quis felis venenatis, sit amet lacinia metus maximus. Maecenas aliquam ipsum at rhoncus feugiat. Suspendisse auctor placerat nisi et consectetur. Duis aliquam libero at lacus dictum, tincidunt vehicula lorem volutpat. Nunc nec dui a lorem consequat faucibus ac at ex. Integer nec leo eros. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam at tortor ac dolor aliquet scelerisque.
-                                                </v-card-text>
-                                            </v-card>
-                                        </v-col>
-                                    </template>
+                                        <v-card>
+                                            <v-card-title class="">
+                                                <v-list-item class="grow">
+                                                    <v-list-item-avatar color="primary">
+                                                        <v-img
+                                                            alt=""
+                                                            src="https://themeselection.com/demo/materio-vuetify-vuejs-admin-template-free/demo/img/1.e2938115.png"
+                                                            ></v-img>
+                                                    </v-list-item-avatar>
+
+                                                    <v-list-item-content>
+                                                        <v-list-item-title><%=publicacionx.getNombreUsuario() + " - " + publicacionx.getTitulo()%></v-list-item-title>
+                                                        <v-list-item-subtitle><%=publicacionx.getFecha().toString()%></v-list-item-subtitle>
+                                                    </v-list-item-content>
+                                                </v-list-item>
+                                            </v-card-title>
+                                            <v-card-text class="pl-8 pr-8">
+                                                <%=publicacionx.getMensaje()%>
+                                            </v-card-text>
+                                        </v-card>
+                                    </v-col>
+                                    <%
+                                        }
+                                    %>
                                 </v-row>
                             </v-container>
                         </v-tab-item>
@@ -337,8 +353,8 @@ new Vue({
                 'Foros',
                 'Noticias',
             ],
-            
-            nombreUsuario: '<%=dtoUsuario.getEntidad().getNombreUsuario()+ " " + dtoUsuario.getEntidad().getPaterno()%>',
+
+            nombreUsuario: '<%=dtoUsuario.getEntidad().getNombreUsuario() + " " + dtoUsuario.getEntidad().getPaterno()%>',
             correo: '<%=correo%>',
             imagenUsuario: 'https://themeselection.com/demo/materio-vuetify-vuejs-admin-template-free/demo/img/1.e2938115.png',
 
@@ -356,6 +372,8 @@ new Vue({
 
             //foro
             show: false,
+            strTitulo: '',
+            strMensaje: '',
 
             //noticias
             newsApiUrl: '',

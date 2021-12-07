@@ -5,6 +5,7 @@
 package com.ipn.mx.datavaccine.dao;
 
 import com.ipn.mx.datavaccine.dto.VacunaDTO;
+import com.ipn.mx.datavaccine.entidades.Publicacion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -177,6 +178,76 @@ public class Vacunadao {
             }
         }
     }
+    
+    public List obtenerMensajes(int idVacuna) throws SQLException {
+        conectar();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List resultados = new ArrayList();
+        
+        try {
+            ps = conexion.prepareStatement("select * from Publicaciones where idVacuna = ? order by Fecha desc;");
+            ps.setInt(1, idVacuna);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Publicacion pubx = new Publicacion();
+                pubx.setIdPublicacion(rs.getInt("idPublicacion"));
+                pubx.setIdVacuna(rs.getInt("idVacuna"));
+                pubx.setTitulo(rs.getString("Titulo"));
+                pubx.setNombreUsuario(rs.getString("NombreUsuario"));
+                pubx.setMensaje(rs.getString("Contenido"));
+                pubx.setImagen(rs.getString("Imagen"));
+                pubx.setFecha(rs.getDate("Fecha"));
+                resultados.add(pubx);
+            }
+            
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conexion != null) {
+                conexion.close();
+            }
+        }
+        
+        return resultados;
+    }
+    
+    
+    public boolean guardarPublicacion(Publicacion publicacionx) throws SQLException {
+        conectar();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        boolean guardado = false;
+
+        try {
+            ps = conexion.prepareStatement("call spGuardarMensaje(?, ?, ?, ?, ?, ?);");
+            ps.setString(1, publicacionx.getNombreUsuario());
+            ps.setString(2, publicacionx.getTitulo());
+            ps.setString(3, publicacionx.getMensaje());
+            ps.setString(4, publicacionx.getImagen());
+            ps.setDate(5, publicacionx.getFecha());
+            ps.setInt(6, publicacionx.getIdVacuna());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                guardado = rs.getString("msj").equals("ok");
+            }
+            
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conexion != null) {
+                conexion.close();
+            }
+        }
+        
+        return guardado;
+    }
+    
     
     public static void main(String[] args) {
         Vacunadao dao = new Vacunadao();

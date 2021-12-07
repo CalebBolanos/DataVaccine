@@ -3,8 +3,10 @@ com/ipn/mx/datavaccine/dto/VacunaDTO.class
 com/ipn/mx/datavaccine/entidades/Usuario.class
 com/ipn/mx/datavaccine/entidades/Vacuna.class
 com/ipn/mx/datavaccine/dao/UsuarioDAO.class
+com/ipn/mx/datavaccine/controlador/usuario/ProcesarPublicacion.class
 com/ipn/mx/datavaccine/controlador/ProcesarRegistro.class
 com/ipn/mx/datavaccine/dto/UsuarioDTO.class
+com/ipn/mx/datavaccine/entidades/Publicacion.class
 com/ipn/mx/datavaccine/controlador/usuario/listaVacunas.class
 com/ipn/mx/datavaccine/dao/Vacunadao.class
 com/ipn/mx/datavaccine/controlador/usuario/configuracionCuenta.class

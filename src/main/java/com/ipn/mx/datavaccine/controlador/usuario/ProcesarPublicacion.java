@@ -6,14 +6,14 @@
 package com.ipn.mx.datavaccine.controlador.usuario;
 
 import com.ipn.mx.datavaccine.dao.Vacunadao;
-import com.ipn.mx.datavaccine.dto.VacunaDTO;
+import com.ipn.mx.datavaccine.dto.UsuarioDTO;
+import com.ipn.mx.datavaccine.entidades.Publicacion;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +25,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author caleb
  */
-@WebServlet(name = "vacuna", urlPatterns = {"/usr/vacunas/vacuna"})
-public class vacuna extends HttpServlet {
+@WebServlet(name = "ProcesarPublicacion", urlPatterns = {"/usr/vacunas/ProcesarPublicacion"})
+public class ProcesarPublicacion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,45 +39,6 @@ public class vacuna extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession sesion = request.getSession();
-        if (sesion.getAttribute("correo") == null) {
-            response.sendRedirect("../../iniciarSesion.jsp");
-            return;
-        }
-
-        try {
-            String vacuna = new String(request.getParameter("x").getBytes(), "UTF-8");
-
-            if (vacuna.equals("")) {
-                response.sendRedirect("../listaVacunas");
-            }
-
-            Vacunadao daoVacuna = new Vacunadao();
-            VacunaDTO dtoVacuna = new VacunaDTO();
-
-            dtoVacuna.getEntidadVacuna().setIdVacuna(Integer.parseInt(vacuna));
-
-            dtoVacuna = daoVacuna.read(dtoVacuna);
-            
-            List mensajesForo = daoVacuna.obtenerMensajes(Integer.parseInt(vacuna));
-            
-            for(int i = 0; i<mensajesForo.size(); i++){
-                System.out.println(mensajesForo.get(i));
-            }
-
-            //hacer switch de vacuna y en funcion a las vacunas que existan dentro de la base de datos obtener su info
-            request.setAttribute("nombreVacuna", dtoVacuna.getEntidadVacuna().getNombreVacuna());
-            request.setAttribute("datosVacuna", dtoVacuna);
-            request.setAttribute("mensajesForo", mensajesForo);
-
-            RequestDispatcher rd = request.getRequestDispatcher("vacunax.jsp");
-            rd.forward(request, response);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(vacuna.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -106,7 +67,33 @@ public class vacuna extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+            java.util.Date date = new java.util.Date();
+            java.sql.Date sqlDate = new Date(date.getTime());
+            
+            HttpSession sesionUsuario = request.getSession();
+            UsuarioDTO dtoUsuario = (UsuarioDTO) sesionUsuario.getAttribute("dtoUsuario");
+            
+            Publicacion publicacion = new Publicacion();
+            
+            publicacion.setIdVacuna(Integer.parseInt(request.getParameter("idVacuna")));
+            publicacion.setNombreUsuario(dtoUsuario.getEntidad().getNombreUsuario());
+            publicacion.setTitulo(request.getParameter("titulo"));
+            publicacion.setMensaje(request.getParameter("mensaje"));
+            publicacion.setImagen("");
+            publicacion.setFecha(sqlDate);
+            
+            Vacunadao daoVacuna = new Vacunadao();
+            
+            if(daoVacuna.guardarPublicacion(publicacion)){
+                response.sendRedirect("vacuna?x="+request.getParameter("idVacuna")+"&link=2");
+            }else{
+                response.sendRedirect("../listaVacunas");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProcesarPublicacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
