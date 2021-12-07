@@ -36,6 +36,7 @@ CREATE TABLE Vacunas
   Portada varchar(1000) NOT NULL,
   Eficacia nvarchar(1500) NOT NULL,
   Seguridad varchar(1000) NOT NULL,
+  EfectoSecundarios nvarchar(1500) NOT NULL,
   PRIMARY KEY (idVacuna)
 );
 
@@ -58,31 +59,17 @@ CREATE TABLE ReaccionesAdversas
   PRIMARY KEY (idSintoma)
 );
 
-CREATE TABLE Foros
+CREATE TABLE Publicaciones
 (
-  idForo INT AUTO_INCREMENT,
-  Nombre varchar(30) NOT NULL,
+  idPublicacion INT AUTO_INCREMENT,
+  Titulo varchar(500) NOT NULL,
+  NombreUsuario varchar(100) NOT NULL,
+  Contenido varchar(5000) NOT NULL,
+  Imagen varchar(1000) NOT NULL,
+  Fecha date NOT NULL,
   idVacuna INT NOT NULL,
-  PRIMARY KEY (idForo),
+  PRIMARY KEY (idPublicacion),
   FOREIGN KEY (idVacuna) REFERENCES Vacunas(idVacuna)
-);
-
-CREATE TABLE Mensajes
-(
-  idMensaje INT AUTO_INCREMENT,
-  Titulo varchar(50) NOT NULL,
-  Contenido varchar(500) NOT NULL,
-  Imagen varchar(500) NOT NULL,
-  PRIMARY KEY (idMensaje)
-);
-
-CREATE TABLE cubren
-(
-  idForo INT NOT NULL,
-  idMensaje INT NOT NULL,
-  PRIMARY KEY (idForo, idMensaje),
-  FOREIGN KEY (idForo) REFERENCES Foros(idForo),
-  FOREIGN KEY (idMensaje) REFERENCES Mensajes(idMensaje)
 );
 
 CREATE TABLE Consulta
@@ -118,8 +105,8 @@ insert into Vacunas values(1,"CanSino", "Es una vacuna de origen chino que fue d
     Biotecnoligia de Beijing y Cansino Biologics, es una vacuna basada en un adenovirus que suele causar 
     resfriados o sintomas similares y han sido modificados para que no te causen la enfermedad, a este adenovirus 
     se le integra una proteina del virus SARS-CoV-2 su aplicacion es en el brazo a personas a partir de los 18 anios", 
-    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.gob.mx%2Fcms%2Fuploads%2Fattachment%2Ffile%2F597621%2FEstrategia_de_politica_exterior_contra_el_COVID-19_1.pdf&psig=AOvVaw06BGQdLMeiffQmwGRHOdN6&ust=1638771880161000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNit5ZaDzPQCFQAAAAAdAAAAABAJ", 
-    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.capital21.cdmx.gob.mx%2Fnoticias%2F%3Fp%3D15783&psig=AOvVaw06BGQdLMeiffQmwGRHOdN6&ust=1638771880161000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNit5ZaDzPQCFQAAAAAdAAAAABAT", 
+    "https://pbs.twimg.com/media/Eb--49ZWoAICjDI.jpg", 
+    "https://www.elfinanciero.com.mx/resizer/Zyh-do1U-VK8kqL4q2Gg3A2Y_sg=/1440x810/filters:format(jpg):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/elfinanciero/AVBO4TR355DH7FOSN3SCLGDCFU.jpg", 
     "De acuerdo con la Secretaria de Salud, los resultados del analisis intermedio del ensayo clinico
     de Fase III de esta vacuna, mostraron que tiene una eficacia general del 68.83 por ciento para la 
     prevencion de todas las infecciones sintomaticas de COVID-19, 14 dias despues de la vacunacion. 
@@ -128,7 +115,11 @@ insert into Vacunas values(1,"CanSino", "Es una vacuna de origen chino que fue d
     los anticuerpos neutralizantes se mantienen altos en 70% de personas", "COFEPRIS autoriza el uso de emergencia para lotes
     envasados en Mexico de la vacuna CanSino, el biologico cumple con especificaciones requeridas para
     garantizar calidad, seguridad y eficancia, se realizaron las pruebas necesarias, incluyendo esterilidad,
-    identidad y potencia, se comprobo que la vacuna en su presentacion envasada cumple con los requerimentos");
+    identidad y potencia, se comprobo que la vacuna en su presentacion envasada cumple con los requerimentos",
+    "Luego de recibir la vacuna CanSino, se pueden presentar los siguientes efectos: dolor en el sitio de aplicacion
+    en un 57%, fatiga en un 42%, fiebre en un 32%, dolor de cabeza con 29%, dolor muscular en 15%, dolor articular en 13%,
+    perdida del apetito en 11%, dolor orofaringeo en 9%, diarrea, nausea y comezon con 8%, induracion y tos en 5%,
+    hinchazon en 4%, vomito y prurito en 2%");
     
 insert into Vacunas values(2, "Pfizer", "Es una vacuna desarrollada por Pfizer de Estados Unidos y BioNTech de 
     Alemania, es una vacuna de ARN mensajero lo que quiere decir que no contiene virus vivos sino que solo una 
@@ -143,7 +134,10 @@ insert into Vacunas values(2, "Pfizer", "Es una vacuna desarrollada por Pfizer d
     vigilancia y la evaluacion de variantes y de sus posibles efectos en la eficacia de las vacunas.", 
     "La OMS autorizo la inclusion de la vacuna de Pfizer BioNTech contra la COVID-19 en la lista de uso 
     de emergencia. La OMS ha evaluado a fondo la calidad, la seguridad y la eficacia de esta vacuna y ha 
-    recomendado su administración a personas mayores de 16 anios");
+    recomendado su administración a personas mayores de 16 anios",
+    "Luego de recibir la vacuna Pfizer, se pueden presentar los siguientes efectos: dolor de cabeza,
+    dolor articular, dolor muscular, dolor en la zona de la inyeccion, cansancio, escalofrios, fiebre,
+    inflamacion en la zona de la inyeccion, estos efectos pueden ser mas comunes tras la segunda dosis.");
     
 insert into Vacunas values(3, "SINOVAC", "Es una vacuna elaborada en la Republica Popular de China por el 
     laboratorio Sinovac, es una vacuna de virus inactivado, es decir de virus muertos que ya no tienen 
@@ -169,7 +163,10 @@ insert into Vacunas values(3, "SINOVAC", "Es una vacuna elaborada en la Republic
     personas mayores de 60 anios deben mantenerse vigilantes ante posibles efectos adversos. Como 
     parte del proceso de inclusion en la lista de uso en emergencias, Sinovac se ha comprometido a seguir 
     presentando datos sobre seguridad, eficacia y calidad procedentes de los ensayos en curso y de 
-    la vacunacion de grupos poblacionales, incluidas las personas de edad avanzada.");
+    la vacunacion de grupos poblacionales, incluidas las personas de edad avanzada.",
+    "Luego de recibir la vacuna SINOVAC, se pueden presentar los siguientes efectos: dolor de cabeza,
+    dolor articular, dolor en la zona de la inyeccion, cansancio y dolor muscular, es posible presentar
+    otros efectos secundarios pero son menos comunes");
 
 insert into Vacunas values(4, "Sputnik V", "Es una vacuna de origen Ruso desarrollada por el Instituto
     Gamaleya, esta basada en un adenovirus que suele causar resfriados y sintomas que suele causar 
@@ -184,7 +181,10 @@ insert into Vacunas values(4, "Sputnik V", "Es una vacuna de origen Ruso desarro
     y tecnicas inadecuadas de aplicacion.", "Con el objetivo de asegurar una inmunidad duradera, cientificos rusos 
     han desarrollado la idea novedosa de usar dos tipos diferentes de vectores adenovirales (rAd26 y rAd5) 
     para la primera y segunda dosis de la vacuna, reforzando así su efecto inmunizador. El uso de adenovirus humanos 
-    como vectores es seguro porque estos virus, que causan el resfriado comun, no son nuevos y existen desde hace miles de anios.");
+    como vectores es seguro porque estos virus, que causan el resfriado comun, no son nuevos y existen desde hace miles de anios.",
+    "Luego de recibir la vacuna Sputnik V, se pueden presentar los siguientes efectos: dolor de cabeza,
+    dolor en el sitio de aplicacion, hiperemia e inflamacion, manifestaciones generales como el sindrome
+    pseudogripal de corta duracion (escalofrios, fiebre, mialgias, artralgias, astenia, malestar y cefalea)");
     
 insert into Vacunas values(5, "AstraZeneca", "Es una vacuna desarrollada en la Universidad de Oxford en conjunto
     con la farmaceutica britanica-sueca AztraZeneca, esta basada en un adenovirus que suele causar resfriados y sintomas que suele causar 
@@ -201,7 +201,10 @@ insert into Vacunas values(5, "AstraZeneca", "Es una vacuna desarrollada en la U
     "La OMS ha clasificado la vacuna de Astrazeneca-Oxford como vacuna de emergencia, y los datos de 
     los ensayos clinicos a gran escala demuestran que es segura y eficaz. La EMA ha evaluado exhaustivamente los datos 
     sobre la calidad, seguridad y eficacia de la vacuna y ha recomendado que se conceda una autorizacion de comercializacion 
-    condicional para las personas de 18 anios y mas.");
+    condicional para las personas de 18 anios y mas.",
+    "Luego de recibir la vacuna AstraZeneca, se pueden presentar los siguientes efectos: dolor de cabeza,
+    dolor o molestia a la palpacion en la zona de la inyeccion, cansancio, dolor muscular o articular, fiebre,
+    escalofrios o nauseas.");
     
 insert into Vacunas values (6, "Janssen", "Fue desarrollada en Estados Unidos por la farmaceutica Janssen de 
     Johnson & Johnson, esta basada en un adenovirus que suele causar resfriados y sintomas que suele causar 
@@ -219,7 +222,10 @@ insert into Vacunas values (6, "Janssen", "Fue desarrollada en Estados Unidos po
     de Moleculas Nuevas sesiono el 7 de mayo de 2021 para analizar el uso de esta vacuna, la cual recibio 
     una opinion favorable de manera unanime por parte de las y los expertos. Esta autorizacion de 
     uso de emergencia certifica que la vacuna cumple los requisitos de calidad, seguridad y eficacia 
-    necesarios para ser aplicada");
+    necesarios para ser aplicada",
+    "Luego de recibir la vacuna Jassen, se pueden presentar los siguientes efectos: dolor de cabeza,
+    dolor o sensibilidad en la zona de inyeccion, enrojecimiento, hinchazon o fiebre, en caso de presentar algun otro malestar
+    recurrir a su medico.");
 
 insert into Vacunas values (7, "Spikevax (Moderna)", "Es producida por la farmaceutica Moderna de Estados Unidos,
     es una vacuna de ARN mensajero lo que quiere decir que no contiene virus vivos sino que solo una parte de una 
@@ -240,7 +246,10 @@ insert into Vacunas values (7, "Spikevax (Moderna)", "Es producida por la farmac
     Después de integrar la opinion del CMN, la solicitud de autorizacion para uso de emergencia fue presentada 
     a la Comision de Autorizacion Sanitaria, donde dictaminadores especializados realizaron una revision 
     de los expedientes, certificando que el biologico cumple los requisitos de calidad, seguridad y eficacia 
-    necesarios para ser aplicado.");
+    necesarios para ser aplicado.",
+    "Luego de recibir la vacuna Moderna, se pueden presentar los siguientes efectos: dolor de cabeza,
+    dolor en la zona de la inyeccion, cansancio, dolor muscular o articular, escalofrios, nauseas o vomitos,
+    inflrmaacion de los ganglios axilares o fiebre, estos efectos secundarios pueden ser mas comunes tras la segunda dosis.");
     
 /*Procedimiento (Procedure) para el INICIO DE SESION*/
 drop procedure if exists spIniciarSesion;
@@ -263,7 +272,25 @@ delimiter ;
 
 call spIniciarSesion("bolanos.c@hotmail.com", "adoo124");
 
-show tables from vacunadoo;
-select * from Vacunas;
+/*Procedimiento (Procedure) para guardar mensaje*/
+drop procedure if exists spGuardarMensaje;
+delimiter |
+create procedure spGuardarMensaje(in nombreusuario varchar(50), title varchar(1000), mensajito varchar(1000), img varchar(1000), fech date, vacun int)
+begin
+	declare idusr, existe int;
+    declare msj nvarchar(200);
 
+	set existe = (select count(*) from Usuario where Nombre = nombreusuario);
+    if(existe = 1) then
+		insert into Publicaciones(Titulo, NombreUsuario, Contenido, Imagen, Fecha, idVacuna) values(title, nombreusuario, mensajito, img, fech, vacun);
+		set msj = "ok";
+    else
+		set msj = "No existe ese usuario";
+	end if;
+    select msj;
+end; |
+delimiter ;
+
+call spGuardarMensaje("prueba", "titulo2", "mensaje2", "imagen", '10-10-20', 1 );
 select * from Usuario;
+select * from Publicaciones;
