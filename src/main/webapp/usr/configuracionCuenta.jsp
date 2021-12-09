@@ -253,7 +253,7 @@
                                                     <v-card-text class="pt-5">
                                                         <v-row>
                                                             <v-col cols="12" md="6">
-                                                                <v-text-field v-model="strFolio" prepend-inner-icon="mdi-account" name="folio" label="Folio de registro MiVacuna (opcional)" type="text" outlined class="mt-4" ></v-text-field>
+                                                                <v-text-field v-model="strFolio" prepend-inner-icon="mdi-account" name="folio" label="Folio de registro MiVacuna (opcional)" type="text" outlined  ></v-text-field>
                                                             </v-col>
 
                                                             <v-col cols="12" md="6">
@@ -287,18 +287,16 @@
                                                                     ></v-combobox>
                                                             </v-col>
 
-                                                            <v-col cols="12" md="6">
-
-                                                            </v-col>
+                                                            
                                                         </v-row>
                                                     </v-card-text>
 
                                                     <v-card-text>
                                                         <v-btn color="primary" class="me-3 mt-3">
-                                                            Save changes
+                                                            Guardar cambios
                                                         </v-btn>
                                                         <v-btn outlined class="mt-3" color="secondary" type="reset" @click.prevent="resetForm">
-                                                            Cancel
+                                                            Cancelar
                                                         </v-btn>
                                                     </v-card-text>
                                                 </v-form>
