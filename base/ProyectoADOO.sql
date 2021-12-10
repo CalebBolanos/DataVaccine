@@ -291,8 +291,39 @@ begin
 end; |
 delimiter ;
 select * from usuario;
-call spGuardarMensaje("usr", "titulo", "mensaje", "imagen", '10-10-20', 1 );
+-- call spGuardarMensaje("usr", "titulo", "mensaje", "imagen", '10-10-20', 1 );
 select * from Usuario;
 select * from Publicaciones;
 
-select * from Publicaciones where idVacuna = 1 order by Fecha desc;
+select * from Publicaciones where idVacuna = 1 order by idPublicacion desc;
+
+-- parte probabipfizer
+select * from reacciones_adversas;
+
+alter table reacciones_adversas 
+change column `Events reported` events_reported int(11);
+
+alter table reacciones_adversas 
+change column `Sex Code` sex_code text;
+
+alter table reacciones_adversas 
+change column `Age Code` age_code text;
+
+select sum(events_reported) from reacciones_adversas;
+
+drop view if exists funcion_distribucion_conjunta_reacciones_adversas;
+create view funcion_distribucion_conjunta_reacciones_adversas as
+select Symptoms, sex, sex_code, age, age_code, events_reported, cast(events_reported/289461 as decimal(50,7)) as probabilidad from reacciones_adversas;
+-- select Symptoms, sex, sex_code, age, age_code, events_reported, (events_reported/328965) as probabilidad from reacciones_adversas;
+
+select * from funcion_distribucion_conjunta_reacciones_adversas;
+
+select probabilidad from funcion_distribucion_conjunta_reacciones_adversas 
+where Symptoms = "fatigue" and sex_code = "F" and age_code = "30-39";
+
+select * from funcion_distribucion_conjunta_reacciones_adversas where Symptoms = "laziness";
+
+select * from funcion_distribucion_conjunta_reacciones_adversas where sex_code = "F" and age_code = "40-49" order by probabilidad desc limit 5;
+
+select count(distinct Symptoms) from funcion_distribucion_conjunta_reacciones_adversas;
+select distinct Symptoms from funcion_distribucion_conjunta_reacciones_adversas;
