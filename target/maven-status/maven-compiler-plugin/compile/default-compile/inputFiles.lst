@@ -11,5 +11,6 @@
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/controlador/ProcesarInicioSesion.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/controlador/cerrarSesion.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/dto/VacunaDTO.java
+/Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/entidades/ReaccionAdversa.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/dto/UsuarioDTO.java
 /Users/caleb/Documents/5to semestre/ADOO/DataVaccine/src/main/java/com/ipn/mx/datavaccine/controlador/usuario/configuracionCuenta.java

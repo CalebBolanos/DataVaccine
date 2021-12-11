@@ -3,6 +3,7 @@
     Created on : 25 nov. 2021, 12:32:32
     Author     : caleb
 --%>
+<%@page import="com.ipn.mx.datavaccine.entidades.ReaccionAdversa"%>
 <%@page import="com.ipn.mx.datavaccine.entidades.Publicacion"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ipn.mx.datavaccine.dto.VacunaDTO"%>
@@ -21,6 +22,8 @@
     VacunaDTO dtoVacuna = (VacunaDTO) request.getAttribute("datosVacuna");
 
     List mensajesForo = (List) request.getAttribute("mensajesForo");
+    List reaccionesAdversas = (List)request.getAttribute("reaccionesAdversas");
+
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -286,14 +289,17 @@
                                                 </v-row>
                                             </v-card-text>
                                             <v-card-actions>
-                                            <v-btn block color="primary" @click="mostrarResultados = true">
+                                            <v-btn block color="primary" @click="mostrarResultados = !mostrarResultados">
                                                 Calcular probabilidad
                                             </v-btn>
                                             </v-card-actions>
-                                            <v-expand-transition>
-                                                <div v-show="mostrarResultados">
+                                            <v-expand-transition >
+                                                <div v-show="mostrarResultados" >
                                                     <v-divider></v-divider>
-                                                    <v-card-text>Hola</v-card-text>
+                                                    <v-card-text >
+                                                        Los sintomas que probablemente podrias llegar a presentar son los siguientes:
+                                                        <bar-chart :renderizar="mostrarResultados" :height="550"></bar-chart>
+                                                    </v-card-text>
                                                 </div>
                                             </v-expand-transition>
                                         </v-card>
@@ -416,7 +422,73 @@
 
         </div>
         <script>
-new Vue({
+Vue.component('bar-chart', {
+    extends: VueChartJs.Bar,
+    props:{
+        renderizar: Boolean
+    },
+        
+    data: () => ({
+            chartdata: {
+                labels: [
+                    <%
+                        ReaccionAdversa reaccionx;
+                        for (int i = 0; i < reaccionesAdversas.size(); i++) {
+                           reaccionx = (ReaccionAdversa) reaccionesAdversas.get(i);
+                           
+                           
+                    %>
+                        <%="'"+reaccionx.getNombre()+"', "%>
+                    <%
+                        }
+                    %>
+                ],
+                datasets: [{
+                        label: 'Sintoma',
+                        backgroundColor: 'rgba(255, 79, 35, 0.7)',
+                        data: [
+                            <%
+                                for (int i = 0; i < reaccionesAdversas.size(); i++) {
+                                   reaccionx = (ReaccionAdversa) reaccionesAdversas.get(i);
+
+                            %>
+                                <%=reaccionx.getPorcentajeProbabilidad()+", "%>
+                            <%
+                                }
+                            %>
+                            //200, 350, 120, 155, 228, 310, 400, 210
+                        ]
+                    }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                }
+            },
+
+        }),
+
+    mounted() {
+        //this.renderChart(this.chartdata, this.options)
+        console.log('a')
+    },
+    
+    watch: {
+        renderizar: function (newVal, oldVal) {
+          this.renderChart(this.chartdata, this.options)
+          console.log('b')
+      }
+  }  
+
+})
+    
+    new Vue({
     el: '#app',
     data: () => ({
             //interfaz

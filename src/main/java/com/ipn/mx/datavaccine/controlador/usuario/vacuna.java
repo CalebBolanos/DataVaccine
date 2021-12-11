@@ -5,7 +5,9 @@
  */
 package com.ipn.mx.datavaccine.controlador.usuario;
 
+import com.ipn.mx.datavaccine.dao.UsuarioDAO;
 import com.ipn.mx.datavaccine.dao.Vacunadao;
+import com.ipn.mx.datavaccine.dto.UsuarioDTO;
 import com.ipn.mx.datavaccine.dto.VacunaDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,7 +54,7 @@ public class vacuna extends HttpServlet {
             if (vacuna.equals("")) {
                 response.sendRedirect("../listaVacunas");
             }
-
+            //parte en donde se obtiene info de la vacuna
             Vacunadao daoVacuna = new Vacunadao();
             VacunaDTO dtoVacuna = new VacunaDTO();
 
@@ -60,16 +62,30 @@ public class vacuna extends HttpServlet {
 
             dtoVacuna = daoVacuna.read(dtoVacuna);
             
+            //parte en donde se obtienen los mensajes del foro
             List mensajesForo = daoVacuna.obtenerMensajes(Integer.parseInt(vacuna));
             
-            for(int i = 0; i<mensajesForo.size(); i++){
-                System.out.println(mensajesForo.get(i));
+//            for(int i = 0; i<mensajesForo.size(); i++){
+//                System.out.println(mensajesForo.get(i));
+//            }
+            
+            //parte en donde se obtienen las reacciones adversas
+            
+            
+            UsuarioDAO daoUsuario = new UsuarioDAO();
+            UsuarioDTO dtoUsuario = (UsuarioDTO) sesion.getAttribute("dtoUsuario");
+            
+            List resultadosReacciones = daoUsuario.calcularReaccionesAdversas(dtoUsuario);
+            
+            for(int i = 0; i<resultadosReacciones.size(); i++){
+                System.out.println(resultadosReacciones.get(i));
             }
-
+            
             //hacer switch de vacuna y en funcion a las vacunas que existan dentro de la base de datos obtener su info
             request.setAttribute("nombreVacuna", dtoVacuna.getEntidadVacuna().getNombreVacuna());
             request.setAttribute("datosVacuna", dtoVacuna);
             request.setAttribute("mensajesForo", mensajesForo);
+            request.setAttribute("reaccionesAdversas", resultadosReacciones);
 
             RequestDispatcher rd = request.getRequestDispatcher("vacunax.jsp");
             rd.forward(request, response);

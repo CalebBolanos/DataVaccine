@@ -135,7 +135,7 @@
                                     vacunax = (VacunaDTO)listaVacuna.get(i);
                                     
                             %>
-                            <v-col cols="12" lg="3" md="3" sm="3" :key="n">
+                            <v-col cols="12" lg="3" md="3" sm="3">
                                 <v-card class="greeting-card">
                                     <v-row class="ma-0 pa-0">
                                         <v-col cols="8" >
@@ -248,36 +248,7 @@
 
         </div>
         <script>
-Vue.component('bar-chart', {
-    extends: VueChartJs.Bar,
-    data: () => ({
-            chartdata: {
-                labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
-                datasets: [{
-                        label: 'Data One',
-                        backgroundColor: 'rgba(255, 79, 35, 0.7)',
-                        data: [200, 350, 120, 155, 228, 310, 400, 210]
-                    }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                }
-            },
 
-        }),
-
-    mounted() {
-        this.renderChart(this.chartdata, this.options)
-    },
-
-})
 
 new Vue({
     el: '#app',

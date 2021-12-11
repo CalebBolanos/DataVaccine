@@ -6,6 +6,7 @@
 package com.ipn.mx.datavaccine.dao;
 
 import com.ipn.mx.datavaccine.dto.UsuarioDTO;
+import com.ipn.mx.datavaccine.entidades.ReaccionAdversa;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -233,6 +234,39 @@ public class UsuarioDAO {
         
         return idUsuario;
     }
+    
+    public List calcularReaccionesAdversas(UsuarioDTO dto) throws SQLException {
+        conectar();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List resultados = new ArrayList();
+        
+        String codigoSexo = obtenerSexCode(dto.getEntidad().getGenero());
+        String rangoEdad = obtenerRangoEdad(dto.getEntidad().getEdad());
+        
+        try {
+            ps = conexion.prepareStatement("select * from funcion_distribucion_conjunta_reacciones_adversas where sex_code = ? and age_code = ? order by probabilidad desc limit 10;");
+            ps.setString(1, codigoSexo);
+            ps.setString(2, rangoEdad);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                ReaccionAdversa reaccion = new ReaccionAdversa(rs.getString("Symptoms"), 
+                        rs.getInt("events_reported"), 
+                        rs.getBigDecimal("probabilidad"));
+                resultados.add(reaccion);
+            }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conexion != null) {
+                conexion.close();
+            }
+        }
+        
+        return resultados;
+    }
 
     public static void main(String[] args) {
         UsuarioDAO dao = new UsuarioDAO();
@@ -244,4 +278,47 @@ public class UsuarioDAO {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public String obtenerRangoEdad(int edad) {
+        if (edad < 1) {
+            return "<6";
+        }
+        if (edad >= 1 && edad <= 2) {
+            return "1-2";
+        }
+        if (edad >= 3 && edad <= 5) {
+            return "3-5";
+        }
+        if (edad >= 6 && edad <= 17) {
+            return "6-17";
+        }
+        if (edad >= 18 && edad <= 29) {
+            return "18-29";
+        }
+        if (edad >= 30 && edad <= 39) {
+            return "30-39";
+        }
+        if (edad >= 40 && edad <= 49) {
+            return "40-49";
+        }
+        if (edad >= 50 && edad <= 59) {
+            return "50-59";
+        }
+        if (edad >= 60 && edad <= 64) {
+            return "60-64";
+        }
+        if (edad >= 65 && edad <= 79) {
+            return "60-64";
+        }
+        if (edad >= 80) {
+            return "80+ years";
+        }
+        return "U";
+    }
+    
+    public String obtenerSexCode(String sexo) {
+        return sexo.equals("Maculino") ? "M" : "F";
+    }
+    
+    
 }

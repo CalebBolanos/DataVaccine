@@ -1,6 +1,7 @@
 com/ipn/mx/datavaccine/controlador/cerrarSesion.class
 com/ipn/mx/datavaccine/dto/VacunaDTO.class
 com/ipn/mx/datavaccine/entidades/Usuario.class
+com/ipn/mx/datavaccine/entidades/ReaccionAdversa.class
 com/ipn/mx/datavaccine/entidades/Vacuna.class
 com/ipn/mx/datavaccine/dao/UsuarioDAO.class
 com/ipn/mx/datavaccine/controlador/usuario/ProcesarPublicacion.class

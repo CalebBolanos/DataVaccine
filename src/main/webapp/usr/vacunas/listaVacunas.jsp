@@ -140,7 +140,7 @@
                                     vacunax = (VacunaDTO)listaVacuna.get(i);
                                     
                             %>
-                            <v-col cols="12" lg="4" md="6" sm="6" :key="n">
+                            <v-col cols="12" lg="4" md="6" sm="6" >
                                 <v-card class="greeting-card">
                                     <v-row class="ma-0 pa-0">
                                         <v-col cols="8" >
