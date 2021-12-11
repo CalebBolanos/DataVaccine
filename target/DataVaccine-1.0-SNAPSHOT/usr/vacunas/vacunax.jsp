@@ -227,7 +227,76 @@
                             <v-container>
                                 <v-row>
                                     <v-col cols="12">
+                                        <h2>Calcular probabilidad de contraer una reaccion adversa (efectos secundarios)</h2>
+                                    </v-col>
+                                    <v-col cols="12">
+                                        <v-card>
+                                            <v-card-text>
+                                                <h3>Con base en la información que proporcionaste al registrate, puedes calcular la probabilidad de contraer una reacción adversa si te inyectan una dosis de {{nombreVacuna}}. 
+                                                    Los datos con los que se haran los calculos son los siguientes:</h3>
 
+                                                <v-row class="pt-7">
+                                                    <v-col cols="12" md="6">
+                                                        <v-text-field readonly v-model="intEdad" prepend-inner-icon="mdi-account" name="edad" label="Edad" type="number" outlined required suffix="años" :rules="reglasEdad"></v-text-field>
+                                                    </v-col>
+                                                    <v-col cols="12" md="6">
+                                                        <v-radio-group readonly v-model="genero" row name="genero">
+                                                            <template v-slot:label>
+                                                                <div>Genero:</div>
+                                                            </template>
+                                                            <v-radio label="Masculino" value="Masculino">
+                                                            </v-radio>
+                                                            <v-radio label="Femenino" value="Femenino">
+                                                            </v-radio>
+                                                        </v-radio-group>
+                                                    </v-col>
+
+                                                    <v-col cols="12" md="6">
+                                                        <v-text-field readonly v-model="intAltura" prepend-inner-icon="mdi-human-male-height" name="altura" label="Altura" type="number" step=".01" outlined required suffix="m" :rules="[intAltura => !!intAltura || 'Este campo es requerido']"></v-text-field>
+                                                    </v-col>
+
+                                                    <v-col cols="12" md="6">
+                                                        <v-text-field readonly v-model="intPeso" prepend-inner-icon="mdi-weight-kilogram" name="peso" label="Peso" type="number" step=".01" outlined required suffix="kg" :rules="[intPeso => !!intPeso || 'Este campo es requerido']"></v-text-field>
+                                                    </v-col>
+
+                                                    <v-col cols="12" md="6">
+                                                        <v-combobox
+                                                            readonly
+                                                            v-model="grupoSanguineo"
+                                                            :items="itemsGrupoSanguineo"
+                                                            label="Grupo sanguíneo"
+                                                            name="grupoSanguineo"
+                                                            outlined
+                                                            required
+                                                            ></v-combobox>
+                                                    </v-col>
+
+                                                    <v-col cols="12" md="6">
+                                                        <v-combobox
+                                                            readonly
+                                                            v-model="alergias"
+                                                            :items="itemsAlergias"
+                                                            label="Alergias (opcional)"
+                                                            name="alergias"
+                                                            outlined
+                                                            multiple
+                                                            chips
+                                                            ></v-combobox>
+                                                    </v-col>
+                                                </v-row>
+                                            </v-card-text>
+                                            <v-card-actions>
+                                            <v-btn block color="primary" @click="mostrarResultados = true">
+                                                Calcular probabilidad
+                                            </v-btn>
+                                            </v-card-actions>
+                                            <v-expand-transition>
+                                                <div v-show="mostrarResultados">
+                                                    <v-divider></v-divider>
+                                                    <v-card-text>Hola</v-card-text>
+                                                </div>
+                                            </v-expand-transition>
+                                        </v-card>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -376,6 +445,37 @@ new Vue({
             panel: [0, 1, 2],
 
             //calcular probabilidad
+            intEdad: <%=dtoUsuario.getEntidad().getEdad()%>,
+            reglasEdad: [
+                v => !!v || "Este campo es requerido",
+                v => (v && v >= 18) || "Debes de tener al menos 18 años",
+            ],
+            genero: '<%=dtoUsuario.getEntidad().getGenero()%>',
+
+            strFolio: '',
+            intAltura: <%=dtoUsuario.getEntidad().getAltura()%>,
+            intPeso: <%=dtoUsuario.getEntidad().getPeso()%>,
+            grupoSanguineo: '<%=dtoUsuario.getEntidad().getGrupoSanguineo()%>',
+            itemsGrupoSanguineo: [
+                'A-',
+                'A+',
+                'B-',
+                'B+',
+                'O-',
+                'O+',
+                'AB-',
+                'AB+',
+            ],
+            alergias: [<%=dtoUsuario.getEntidad().getAlergias()%>],
+            itemsAlergias: [
+                'Alergia 1',
+                'Alergia 2',
+                'Alergia 3',
+                'Alergia 4',
+            ],
+            mostrarResultados: false,
+            
+                    
 
             //foro
             show: false,

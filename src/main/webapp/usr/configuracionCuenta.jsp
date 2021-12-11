@@ -261,7 +261,7 @@
                                                             </v-col>
 
                                                             <v-col cols="12" md="6">
-                                                                <v-text-field v-model="intPeso" prepend-inner-icon="mdi-weight-kilogram" name="peso" label="Peso" type="number" step=".01" outlined class="mt-4" required suffix="kg" :rules="[intPeso => !!intPeso || 'Este campo es requerido']"></v-text-field>
+                                                                <v-text-field v-model="intPeso" prepend-inner-icon="mdi-weight-kilogram" name="peso" label="Peso" type="number" step=".01" outlined required suffix="kg" :rules="[intPeso => !!intPeso || 'Este campo es requerido']"></v-text-field>
                                                             </v-col>
 
                                                             <v-col cols="12" md="6">
