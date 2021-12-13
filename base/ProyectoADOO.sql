@@ -104,10 +104,10 @@ CREATE TABLE Generan
 insert into Vacunas values(1,"CanSino", "Es una vacuna de origen chino que fue disenada por el Instituto de 
     Biotecnoligia de Beijing y Cansino Biologics, es una vacuna basada en un adenovirus que suele causar 
     resfriados o sintomas similares y han sido modificados para que no te causen la enfermedad, a este adenovirus 
-    se le integra una proteina del virus SARS-CoV-2 su aplicacion es en el brazo a personas a partir de los 18 anios", 
+    se le integra una proteina del virus SARS-CoV-2 su aplicacion es en el brazo a personas a partir de los 18 años", 
     "https://pbs.twimg.com/media/Eb--49ZWoAICjDI.jpg", 
     "https://www.elfinanciero.com.mx/resizer/Zyh-do1U-VK8kqL4q2Gg3A2Y_sg=/1440x810/filters:format(jpg):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/elfinanciero/AVBO4TR355DH7FOSN3SCLGDCFU.jpg", 
-    "De acuerdo con la Secretaria de Salud, los resultados del analisis intermedio del ensayo clinico
+    "De acuerdo con la Secretaria de Salud, los resultados del analisis intermedio del ensayo clínico
     de Fase III de esta vacuna, mostraron que tiene una eficacia general del 68.83 por ciento para la 
     prevencion de todas las infecciones sintomaticas de COVID-19, 14 dias despues de la vacunacion. 
     Asi mismo, mostro una eficacia del 65.28 porciento 28 dias despues de su aplicacion. Sin embargo
@@ -123,7 +123,7 @@ insert into Vacunas values(1,"CanSino", "Es una vacuna de origen chino que fue d
     
 insert into Vacunas values(2, "Pfizer", "Es una vacuna desarrollada por Pfizer de Estados Unidos y BioNTech de 
     Alemania, es una vacuna de ARN mensajero lo que quiere decir que no contiene virus vivos sino que solo una 
-    parte de una proteina del virus que provoca COVID-19 y no hace danio su aplicacion es en el brazo a personas a partir de los 18 anios",
+    parte de una proteina del virus que provoca COVID-19 y no hace daño su aplicacion es en el brazo a personas a partir de los 18 años",
     "https://coronavirus.utah.gov/wp-content/uploads/Pfizer-1-1-2-1.png?x50998",
     "https://i1.wp.com/hipertextual.com/wp-content/uploads/2021/04/vacuna-pfizer-coronavirus-scaled.jpeg?fit=2560%2C1439&ssl=1",
     "Segun los datos facilitados por el fabricante, la vacuna Pfizer-BioNTech ha demostrado tener una
@@ -134,14 +134,14 @@ insert into Vacunas values(2, "Pfizer", "Es una vacuna desarrollada por Pfizer d
     vigilancia y la evaluacion de variantes y de sus posibles efectos en la eficacia de las vacunas.", 
     "La OMS autorizo la inclusion de la vacuna de Pfizer BioNTech contra la COVID-19 en la lista de uso 
     de emergencia. La OMS ha evaluado a fondo la calidad, la seguridad y la eficacia de esta vacuna y ha 
-    recomendado su administración a personas mayores de 16 anios",
+    recomendado su administración a personas mayores de 16 años",
     "Luego de recibir la vacuna Pfizer, se pueden presentar los siguientes efectos: dolor de cabeza,
     dolor articular, dolor muscular, dolor en la zona de la inyeccion, cansancio, escalofrios, fiebre,
     inflamacion en la zona de la inyeccion, estos efectos pueden ser mas comunes tras la segunda dosis.");
     
 insert into Vacunas values(3, "SINOVAC", "Es una vacuna elaborada en la Republica Popular de China por el 
     laboratorio Sinovac, es una vacuna de virus inactivado, es decir de virus muertos que ya no tienen 
-    capacidad de causar enfermedad, su aplicacion es en el brazo a personas a partir de los 18 anios, se
+    capacidad de causar enfermedad, su aplicacion es en el brazo a personas a partir de los 18 años, se
     requieren dos dosis para su completa proteccion",
     "https://enfarma.lat/images/noticias/2020-09/sinovac.jpg",
     "https://icdn.dtcn.com/image/digitaltrends_es/shutterstock_1827366647-416x416.jpg",
@@ -156,11 +156,11 @@ insert into Vacunas values(3, "SINOVAC", "Es una vacuna elaborada en la Republic
     en un estudio observacional realizado en Sao Paulo (Brasil), donde circulaba tambien la variante
     P.1 (se detecto en el 83% de las muestras)", "El SAGE ha evaluado exhaustivamente los datos sobre la calidad, 
     la seguridad y la eficacia de la vacuna y ha recomendado su administracion a las personas de 18 
-    anios y mas. Se dispone de pocos datos sobre la inocuidad de esta vacuna en personas mayores de 
-    60 anios, debido al reducido numero de participantes en los ensayos clinicos. Aunque no se puede 
+    años y mas. Se dispone de pocos datos sobre la inocuidad de esta vacuna en personas mayores de 
+    60 años, debido al reducido numero de participantes en los ensayos clinicos. Aunque no se puede 
     anticipar que haya diferencias en el perfil de seguridad de la vacuna en los adultos mayores con 
     respecto a los grupos de edad mas jovenes, los paises que se planteen administrar esta vacuna a 
-    personas mayores de 60 anios deben mantenerse vigilantes ante posibles efectos adversos. Como 
+    personas mayores de 60 años deben mantenerse vigilantes ante posibles efectos adversos. Como 
     parte del proceso de inclusion en la lista de uso en emergencias, Sinovac se ha comprometido a seguir 
     presentando datos sobre seguridad, eficacia y calidad procedentes de los ensayos en curso y de 
     la vacunacion de grupos poblacionales, incluidas las personas de edad avanzada.",
@@ -172,7 +172,7 @@ insert into Vacunas values(4, "Sputnik V", "Es una vacuna de origen Ruso desarro
     Gamaleya, esta basada en un adenovirus que suele causar resfriados y sintomas que suele causar 
     resfriados o sintomas similares y han sido modificados para que no te causen la enfermedad, a este adenovirus 
     se le integra una proteina del virus SARS-CoV-2, su aplicacion es en el brazo a personas a partir de los 
-    18 anios, se requiere de dos dosis para su total proteccion", 
+    18 años, se requiere de dos dosis para su total proteccion", 
     "https://elperiodicodevillena.com/wp-content/uploads/2021/02/SputnikV.png",
     "https://ichef.bbci.co.uk/news/640/cpsprodpb/7CFC/production/_119769913_1.jpg",
     "La eficacia de la vacuna, confirmada por el analisis de los datos en el punto de control final de los ensayos
@@ -181,7 +181,7 @@ insert into Vacunas values(4, "Sputnik V", "Es una vacuna de origen Ruso desarro
     y tecnicas inadecuadas de aplicacion.", "Con el objetivo de asegurar una inmunidad duradera, cientificos rusos 
     han desarrollado la idea novedosa de usar dos tipos diferentes de vectores adenovirales (rAd26 y rAd5) 
     para la primera y segunda dosis de la vacuna, reforzando así su efecto inmunizador. El uso de adenovirus humanos 
-    como vectores es seguro porque estos virus, que causan el resfriado comun, no son nuevos y existen desde hace miles de anios.",
+    como vectores es seguro porque estos virus, que causan el resfriado comun, no son nuevos y existen desde hace miles de años.",
     "Luego de recibir la vacuna Sputnik V, se pueden presentar los siguientes efectos: dolor de cabeza,
     dolor en el sitio de aplicacion, hiperemia e inflamacion, manifestaciones generales como el sindrome
     pseudogripal de corta duracion (escalofrios, fiebre, mialgias, artralgias, astenia, malestar y cefalea)");
@@ -190,7 +190,7 @@ insert into Vacunas values(5, "AstraZeneca", "Es una vacuna desarrollada en la U
     con la farmaceutica britanica-sueca AztraZeneca, esta basada en un adenovirus que suele causar resfriados y sintomas que suele causar 
     resfriados o sintomas similares y han sido modificados para que no te causen la enfermedad, a este adenovirus 
     se le integra una proteina del virus SARS-CoV-2, su aplicacion es en el brazo a personas mayores a los 18 
-    anios, se requiere de dos dosis para su proteccion total", 
+    años, se requiere de dos dosis para su proteccion total", 
     "https://upload.wikimedia.org/wikipedia/de/thumb/e/ee/AstraZeneca_logo.svg/2560px-AstraZeneca_logo.svg.png",
     "https://cdn-3.expansion.mx/dims4/default/8607d89/2147483647/strip/true/crop/1800x1110+0+0/resize/1200x740!/format/webp/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2Ff4%2F13%2Fa34387c44f43bc215ae509022989%2F2020-11-23t185921z-2147405510-rc269k9y7kli-rtrmadp-3-health-coronavirus-astrazeneca-oxford.jpg",
     "Segun los datos facilitados por el fabricante, la vacuna de AstraZeneca-Oxford (AZD1222) ha 
@@ -201,7 +201,7 @@ insert into Vacunas values(5, "AstraZeneca", "Es una vacuna desarrollada en la U
     "La OMS ha clasificado la vacuna de Astrazeneca-Oxford como vacuna de emergencia, y los datos de 
     los ensayos clinicos a gran escala demuestran que es segura y eficaz. La EMA ha evaluado exhaustivamente los datos 
     sobre la calidad, seguridad y eficacia de la vacuna y ha recomendado que se conceda una autorizacion de comercializacion 
-    condicional para las personas de 18 anios y mas.",
+    condicional para las personas de 18 años y mas.",
     "Luego de recibir la vacuna AstraZeneca, se pueden presentar los siguientes efectos: dolor de cabeza,
     dolor o molestia a la palpacion en la zona de la inyeccion, cansancio, dolor muscular o articular, fiebre,
     escalofrios o nauseas.");
@@ -210,7 +210,7 @@ insert into Vacunas values (6, "Janssen", "Fue desarrollada en Estados Unidos po
     Johnson & Johnson, esta basada en un adenovirus que suele causar resfriados y sintomas que suele causar 
     resfriados o sintomas similares y han sido modificados para que no te causen la enfermedad, a este adenovirus 
     se le integra una proteina del virus SARS-CoV-2, su aplicacion es en el brazo a personas mayores a los 18 
-    anios, solo requiere una dosis",
+    años, solo requiere una dosis",
     "https://semst.org/wp-content/uploads/2021/04/logo-janssen.gif",
     "https://phantom-marca.unidadeditorial.es/04d9e0f5167ff308a9dc52b73d86b3d3/resize/1320/f/jpg/assets/multimedia/imagenes/2021/05/12/16207973415931.jpg",
     "Segun los datos facilitados por el fabricante, la vacuna de Johnson & Johnson (Ad26.COV2.S) 
@@ -229,8 +229,8 @@ insert into Vacunas values (6, "Janssen", "Fue desarrollada en Estados Unidos po
 
 insert into Vacunas values (7, "Spikevax (Moderna)", "Es producida por la farmaceutica Moderna de Estados Unidos,
     es una vacuna de ARN mensajero lo que quiere decir que no contiene virus vivos sino que solo una parte de una 
-    proteina del virus que provoca COVID-19 y no hace danio su aplicacion es en el brazo a personas a 
-    partir de los 18 anios, se requiere de dos dosis para su proteccion completa", 
+    proteina del virus que provoca COVID-19 y no hace daño su aplicacion es en el brazo a personas a 
+    partir de los 18 años, se requiere de dos dosis para su proteccion completa", 
     "https://semst.org/wp-content/uploads/2021/04/logomoderna-1200x913.jpg",
     "https://img2.rtve.es/imagenes/logotipo-farmaceutica-moderna-junto-frasco-vacuna-imagen-archivo/1608041409942.jpg",
     "Segun los datos facilitados por el fabricante, la vacuna de Moderna (mRNA-1273) ha demostrado 
